@@ -1,0 +1,10 @@
+[project]
+name = "industry-data-in"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "bse>=3.1.0",
+    "nse[server]>=2.0.0",
+]
