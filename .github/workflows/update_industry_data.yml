@@ -1,0 +1,68 @@
+name: Update Industry Data
+
+on:
+  schedule:
+    # Run weekly on Sunday at 00:00 UTC
+    # Note: Weekly schedule implies using 'weekly' frequency settings (15 attempts, 90s wait).
+    # If run frequency changes, consider updating the command arguments or CLI logic.
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+    inputs:
+      full_refresh:
+        description: 'Run full refresh (rebuild database)'
+        required: false
+        default: 'false'
+        type: boolean
+      frequency:
+        description: 'Retry tuning frequency (daily, weekly, monthly)'
+        required: true
+        default: 'weekly'
+        type: choice
+        options:
+          - daily
+          - weekly
+          - monthly
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Run Update Script
+        run: |
+          if [[ "${{ github.event_name }}" == "schedule" ]]; then
+            echo "Running scheduled weekly refresh..."
+            # Scheduled runs use weekly settings
+            uv run python main.py --refresh --frequency weekly
+          else
+            echo "Running manual workflow..."
+            FULL_REFRESH="${{ inputs.full_refresh }}"
+            FREQUENCY="${{ inputs.frequency }}"
+
+            if [[ "$FULL_REFRESH" == "true" ]]; then
+              echo "Executing Full Refresh with frequency=$FREQUENCY"
+              uv run python main.py --full-refresh --frequency "$FREQUENCY"
+            else
+              echo "Executing Refresh with frequency=$FREQUENCY"
+              uv run python main.py --refresh --frequency "$FREQUENCY"
+            fi
+          fi
+
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update industry data [skip ci]"
+          file_pattern: "industry_data.json"
