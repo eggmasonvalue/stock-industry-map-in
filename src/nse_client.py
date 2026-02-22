@@ -3,7 +3,7 @@ import io
 import time
 from typing import Dict, List, Optional
 import requests
-from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+from tenacity import Retrying, stop_after_attempt, wait_exponential, retry_if_exception_type
 from nse import NSE
 import os
 
@@ -12,18 +12,25 @@ class NSEClient:
         os.makedirs(download_folder, exist_ok=True)
         self.nse = NSE(download_folder=download_folder)
         self.base_url = "https://www.nseindia.com/api"
+        # Default retry settings (weekly)
+        self.max_attempts = 15
+        self.max_wait = 90
 
-    @retry(
-        stop=stop_after_attempt(5),
-        wait=wait_exponential(multiplier=1, min=2, max=10),
-        retry=retry_if_exception_type((requests.exceptions.RequestException, ConnectionError, TimeoutError))
-    )
+    def set_retry_config(self, max_attempts: int, max_wait: int):
+        self.max_attempts = max_attempts
+        self.max_wait = max_wait
+
     def _fetch_url(self, url, params=None):
         """Fetches a URL with retries."""
+        retryer = Retrying(
+            stop=stop_after_attempt(self.max_attempts),
+            wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
+            retry=retry_if_exception_type((requests.exceptions.RequestException, ConnectionError, TimeoutError)),
+            reraise=True
+        )
         try:
-            return self.nse._req(url, params=params)
+            return retryer(self.nse._req, url, params=params)
         except Exception as e:
-            # Re-raise to trigger tenacity retry
             raise e
 
     def get_mainboard_symbols(self) -> List[str]:

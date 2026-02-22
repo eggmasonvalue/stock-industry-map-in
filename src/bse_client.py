@@ -1,7 +1,7 @@
 import time
 from typing import Dict, List, Optional
 import requests
-from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+from tenacity import Retrying, stop_after_attempt, wait_exponential, retry_if_exception_type
 from bse import BSE
 import os
 
@@ -9,28 +9,37 @@ class BSEClient:
     def __init__(self, download_folder="./temp_downloads"):
         os.makedirs(download_folder, exist_ok=True)
         self.bse = BSE(download_folder=download_folder)
+        # Default retry settings (weekly)
+        self.max_attempts = 15
+        self.max_wait = 90
 
-    @retry(
-        stop=stop_after_attempt(5),
-        wait=wait_exponential(multiplier=1, min=2, max=10),
-        retry=retry_if_exception_type((requests.exceptions.RequestException, ConnectionError, TimeoutError))
-    )
+    def set_retry_config(self, max_attempts: int, max_wait: int):
+        self.max_attempts = max_attempts
+        self.max_wait = max_wait
+
     def _fetch_securities(self):
         """Fetches securities with retry."""
+        retryer = Retrying(
+            stop=stop_after_attempt(self.max_attempts),
+            wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
+            retry=retry_if_exception_type((requests.exceptions.RequestException, ConnectionError, TimeoutError)),
+            reraise=True
+        )
         try:
-            return self.bse.listSecurities()
+            return retryer(self.bse.listSecurities)
         except Exception as e:
             raise e
 
-    @retry(
-        stop=stop_after_attempt(5),
-        wait=wait_exponential(multiplier=1, min=2, max=10),
-        retry=retry_if_exception_type((requests.exceptions.RequestException, ConnectionError, TimeoutError))
-    )
     def _fetch_meta_info(self, scrip_code):
         """Fetches meta info with retry."""
+        retryer = Retrying(
+            stop=stop_after_attempt(self.max_attempts),
+            wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
+            retry=retry_if_exception_type((requests.exceptions.RequestException, ConnectionError, TimeoutError)),
+            reraise=True
+        )
         try:
-            return self.bse.equityMetaInfo(scrip_code)
+            return retryer(self.bse.equityMetaInfo, scrip_code)
         except Exception as e:
             raise e
 

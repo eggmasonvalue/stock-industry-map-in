@@ -10,25 +10,31 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 class Orchestrator:
-    def __init__(self, store_path="industry_data.json"):
+    def __init__(self, store_path="industry_data.json", frequency="weekly"):
         self.store = Store(filepath=store_path)
         self.nse_client = NSEClient()
         self.bse_client = BSEClient()
+        self._configure_retries(frequency)
+
+    def _configure_retries(self, frequency):
+        settings = {
+            "daily": {"max_attempts": 5, "max_wait": 30},
+            "weekly": {"max_attempts": 15, "max_wait": 90},
+            "monthly": {"max_attempts": 30, "max_wait": 180}
+        }
+        config = settings.get(frequency, settings["weekly"])
+        logger.info(f"Configuring retries for {frequency}: {config}")
+        self.nse_client.set_retry_config(**config)
+        self.bse_client.set_retry_config(**config)
 
     def _process_nse_securities(self, symbols: List[str], is_sme: bool):
         total = len(symbols)
         logger.info(f"Processing {total} NSE symbols (SME={is_sme})...")
 
         for i, symbol in enumerate(symbols):
-            if symbol in self.store.data:
-                # Check if data is complete (non-null/non-empty)
-                # But for full refresh, store is empty.
-                # For refresh, we check if missing.
-                pass
-
-            # If not in store or store has partial data?
-            # The logic for refresh is: check if a. entry exists b. entry isn't null.
-            # Here I assume the caller handles filtering.
+            if symbol in self.store.data and self.store.data[symbol]:
+                # Already processed (e.g. by BSE or previous run if logic changed)
+                continue
 
             logger.info(f"[{i+1}/{total}] Fetching info for NSE: {symbol}")
             info = self.nse_client.get_industry_info(symbol, is_sme=is_sme)
@@ -38,12 +44,7 @@ class Orchestrator:
                 logger.info(f"Updated {symbol}: {info}")
             else:
                 logger.warning(f"No info found for NSE: {symbol}")
-                # Maybe mark as processed but empty?
-                # Store doesn't support empty explicit marker, but maybe we should store None?
-                # The requirement says: "check whether a. The stock has an entry in the .json b. Stock's entries isn't null."
-                # So if we don't store it, next refresh will try again. This is good.
 
-            # Save periodically?
             if (i + 1) % 50 == 0:
                 self.store.save()
 
@@ -53,22 +54,16 @@ class Orchestrator:
 
         for i, sec in enumerate(securities):
             scrip_code = sec['scrip_code']
-            symbol = sec['symbol'] # We use symbol as key?
-            # Wait, user example: "RELIANCE": [...]
-            # BSE has scrip code and scrip ID (symbol).
-            # If a stock is on both, we might overwrite?
-            # NSE symbol is RELIANCE. BSE symbol is RELIANCE.
-            # If they are same, we overwrite.
-            # User requirement: "maps stocks to their respective industry."
-            # If a stock is listed on both, industry should be same.
-            # If not, last write wins.
-            # We should perhaps key by symbol.
+            symbol = sec['symbol']
+
+            if symbol in self.store.data and self.store.data[symbol]:
+                continue
 
             logger.info(f"[{i+1}/{total}] Fetching info for BSE: {symbol} ({scrip_code})")
             info = self.bse_client.get_industry_info(scrip_code)
 
             if info:
-                self.store.update_stock(symbol, info) # Using Symbol as key
+                self.store.update_stock(symbol, info)
                 logger.info(f"Updated {symbol}: {info}")
             else:
                 logger.warning(f"No info found for BSE: {symbol} ({scrip_code})")
@@ -80,17 +75,30 @@ class Orchestrator:
         logger.info("Starting Full Refresh...")
         self.store.clear()
 
-        # BSE (Process first so NSE can overwrite if present, ensuring NSE terminology precedence)
+        # BSE (Process first)
         bse_secs = self.bse_client.get_securities()
         self._process_bse_securities(bse_secs)
 
         # NSE Mainboard
+        # Optimization: process only if NOT already in store (populated by BSE)
         nse_main = self.nse_client.get_mainboard_symbols()
-        self._process_nse_securities(nse_main, is_sme=False)
+        nse_main_missing = [s for s in nse_main if s not in self.store.data or not self.store.data[s]]
+
+        if nse_main_missing:
+            logger.info(f"Found {len(nse_main_missing)} missing/incomplete NSE Mainboard symbols (after BSE processing).")
+            self._process_nse_securities(nse_main_missing, is_sme=False)
+        else:
+            logger.info("All NSE Mainboard symbols already covered by BSE data.")
 
         # NSE SME
         nse_sme = self.nse_client.get_sme_symbols()
-        self._process_nse_securities(nse_sme, is_sme=True)
+        nse_sme_missing = [s for s in nse_sme if s not in self.store.data or not self.store.data[s]]
+
+        if nse_sme_missing:
+            logger.info(f"Found {len(nse_sme_missing)} missing/incomplete NSE SME symbols (after BSE processing).")
+            self._process_nse_securities(nse_sme_missing, is_sme=True)
+        else:
+             logger.info("All NSE SME symbols already covered by BSE data.")
 
         self.store.save()
         logger.info("Full Refresh Complete.")
@@ -98,12 +106,6 @@ class Orchestrator:
     def refresh(self):
         logger.info("Starting Refresh...")
         self.store.load()
-
-        # We need to fetch the list of all securities to know what to check.
-        # Logic:
-        # 1. Fetch current list of securities from exchanges.
-        # 2. Compare with store.
-        # 3. Identify targets: not in store OR store entry is null (or incomplete).
 
         # NSE Mainboard
         nse_main = self.nse_client.get_mainboard_symbols()

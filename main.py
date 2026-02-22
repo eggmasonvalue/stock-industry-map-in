@@ -8,9 +8,11 @@ def main():
     group.add_argument('--refresh', action='store_true', help='Refresh missing/incomplete data.')
     group.add_argument('--full-refresh', action='store_true', help='Rebuild database from scratch.')
 
+    parser.add_argument('--frequency', choices=['daily', 'weekly', 'monthly'], default='weekly', help='Run frequency for retry tuning.')
+
     args = parser.parse_args()
 
-    orchestrator = Orchestrator()
+    orchestrator = Orchestrator(frequency=args.frequency)
 
     if args.full_refresh:
         orchestrator.full_refresh()
