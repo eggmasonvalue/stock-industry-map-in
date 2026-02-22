@@ -1,3 +1,6 @@
 clipboard.md
 __pycache__/
 *.pyc
+*.pkl
+temp_downloads/
+test_*.json
