@@ -3,7 +3,7 @@ import io
 import time
 from typing import Dict, List, Optional
 import requests
-from tenacity import Retrying, stop_after_attempt, wait_exponential, retry_if_exception_type
+from tenacity import Retrying, stop_after_attempt, wait_exponential, retry_if_exception_type, retry_if_exception
 from nse import NSE
 import os
 import httpx
@@ -35,12 +35,20 @@ class NSEClient:
             httpx.RequestError
         )
 
+    def _is_retryable_exception(self, exception):
+        """Checks if an exception is retryable."""
+        # Check if it's a 404 ConnectionError (which NSE library raises for Not Found)
+        if isinstance(exception, ConnectionError) and "404" in str(exception):
+            return False
+        # Retry on other ConnectionErrors, RequestExceptions, Timeouts, etc.
+        return isinstance(exception, self._get_retry_exceptions())
+
     def _fetch_url(self, url, params=None):
         """Fetches a URL with retries."""
         retryer = Retrying(
             stop=stop_after_attempt(self.max_attempts),
             wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
-            retry=retry_if_exception_type(self._get_retry_exceptions()),
+            retry=retry_if_exception(self._is_retryable_exception),
             reraise=True
         )
         try:
@@ -53,12 +61,38 @@ class NSEClient:
         retryer = Retrying(
             stop=stop_after_attempt(self.max_attempts),
             wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
-            retry=retry_if_exception_type(self._get_retry_exceptions()),
+            retry=retry_if_exception(self._is_retryable_exception),
             reraise=True
         )
         try:
             # fetch_symbol_data might raise exceptions which are retryable
             return retryer(self.nse.fetch_symbol_data, symbol, series)
+        except Exception as e:
+            raise e
+
+    def _fetch_sme_data(self, symbol):
+        """
+        Tries to fetch data for SME symbol.
+        Tries 'SM' series first. If 404, tries 'ST' series.
+        """
+        try:
+            return self.nse.fetch_symbol_data(symbol, 'SM')
+        except ConnectionError as e:
+            if "404" in str(e):
+                # SM not found, try ST
+                return self.nse.fetch_symbol_data(symbol, 'ST')
+            raise e
+
+    def _fetch_sme_data_with_retry(self, symbol):
+        """Fetches SME symbol data with retries."""
+        retryer = Retrying(
+            stop=stop_after_attempt(self.max_attempts),
+            wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
+            retry=retry_if_exception(self._is_retryable_exception),
+            reraise=True
+        )
+        try:
+            return retryer(self._fetch_sme_data, symbol)
         except Exception as e:
             raise e
 
@@ -103,37 +137,43 @@ class NSEClient:
         Fetches industry info for a symbol using fetch_symbol_data.
         Returns [Macro, Sector, Industry, Basic Industry] or None if not found.
         """
-        series_list = ['SM', 'ST'] if is_sme else ['EQ']
+        if symbol.endswith('-RE'):
+            return None
 
-        for series in series_list:
-            try:
-                # Add a small delay to be polite
-                time.sleep(0.1)
+        def extract_info(data):
+            # Check if valid data
+            if 'equityResponse' in data and len(data['equityResponse']) > 0:
+                sec_info = data['equityResponse'][0].get('secInfo', {})
 
-                data = self._fetch_symbol_data_with_retry(symbol, series)
+                # Extract fields
+                macro = sec_info.get('macro')
+                sector = sec_info.get('sector')
+                industry_info = sec_info.get('industryInfo')
+                basic_industry = sec_info.get('basicIndustry')
 
-                if data:
-                    # Check if valid data
-                    if 'equityResponse' in data and len(data['equityResponse']) > 0:
-                        sec_info = data['equityResponse'][0].get('secInfo', {})
+                # Check if any field is populated
+                if any([macro, sector, industry_info, basic_industry]):
+                    return [
+                        macro or "-",
+                        sector or "-",
+                        industry_info or "-",
+                        basic_industry or "-"
+                    ]
+            return None
 
-                        # Extract fields
-                        macro = sec_info.get('macro')
-                        sector = sec_info.get('sector')
-                        industry_info = sec_info.get('industryInfo')
-                        basic_industry = sec_info.get('basicIndustry')
+        # Add a small delay to be polite
+        time.sleep(0.1)
 
-                        # Check if any field is populated
-                        if any([macro, sector, industry_info, basic_industry]):
-                            return [
-                                macro or "-",
-                                sector or "-",
-                                industry_info or "-",
-                                basic_industry or "-"
-                            ]
-            except Exception as e:
-                # Log error but continue to next series/symbol
-                # print(f"Error fetching info for {symbol} ({series}): {e}")
-                pass
+        try:
+            if is_sme:
+                data = self._fetch_sme_data_with_retry(symbol)
+                return extract_info(data)
+            else:
+                data = self._fetch_symbol_data_with_retry(symbol, 'EQ')
+                return extract_info(data)
+        except Exception:
+            # Log error but continue
+            # print(f"Error fetching info for {symbol}: {e}")
+            pass
 
         return None

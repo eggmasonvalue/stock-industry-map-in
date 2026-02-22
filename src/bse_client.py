@@ -17,7 +17,7 @@ class BSEClient:
         self.max_attempts = max_attempts
         self.max_wait = max_wait
 
-    def _fetch_securities(self):
+    def _fetch_securities(self, group='A'):
         """Fetches securities with retry."""
         retryer = Retrying(
             stop=stop_after_attempt(self.max_attempts),
@@ -26,7 +26,7 @@ class BSEClient:
             reraise=True
         )
         try:
-            return retryer(self.bse.listSecurities)
+            return retryer(self.bse.listSecurities, group=group)
         except Exception as e:
             raise e
 
@@ -49,21 +49,30 @@ class BSEClient:
         Returns a list of dicts containing 'scrip_code' and 'symbol'.
         """
         print("Fetching BSE securities list...")
-        try:
-            securities = self._fetch_securities()
-            result = []
-            for sec in securities:
-                if 'SCRIP_CD' in sec and 'scrip_id' in sec:
-                    result.append({
-                        'scrip_code': sec['SCRIP_CD'],
-                        'symbol': sec['scrip_id']
-                    })
-            return result
-        except Exception as e:
-            print(f"Error fetching BSE securities: {e}")
-            return []
+        result = []
 
-    def get_industry_info(self, scrip_code: str) -> Optional[List[str]]:
+        groups = self.bse.valid_groups
+        if not groups:
+            groups = ('A',)
+
+        for group in groups:
+            # print(f"Fetching group {group}...")
+            try:
+                securities = self._fetch_securities(group=group)
+                for sec in securities:
+                    if 'SCRIP_CD' in sec and 'scrip_id' in sec:
+                        result.append({
+                            'scrip_code': sec['SCRIP_CD'],
+                            'symbol': sec['scrip_id'],
+                            'group': group
+                        })
+            except Exception as e:
+                print(f"Error fetching BSE securities for group {group}: {e}")
+                # Continue to next group
+
+        return result
+
+    def get_industry_info(self, scrip_code: str, symbol: Optional[str] = None) -> Optional[List[str]]:
         """
         Fetches industry info for a BSE scrip code.
         Returns [Macro, Sector, Industry, Basic Industry] or None if not found.
@@ -73,6 +82,9 @@ class BSEClient:
         IGroup -> Industry
         ISubGroup -> Basic Industry
         """
+        if symbol and symbol.endswith('-RE'):
+            return None
+
         try:
             # Add a small delay
             time.sleep(0.1)
