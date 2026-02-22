@@ -6,6 +6,6 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "bse @ git+https://github.com/eggmasonvalue/BseIndiaApi.git",
-    "nse[server]>=2.0.0",
+    "nse @ git+https://github.com/eggmasonvalue/NseIndiaApi.git",
     "tenacity>=8.2.0",
 ]

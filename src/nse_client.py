@@ -33,6 +33,20 @@ class NSEClient:
         except Exception as e:
             raise e
 
+    def _fetch_symbol_data_with_retry(self, symbol, series):
+        """Fetches symbol data with retries using fetch_symbol_data."""
+        retryer = Retrying(
+            stop=stop_after_attempt(self.max_attempts),
+            wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
+            retry=retry_if_exception_type((requests.exceptions.RequestException, ConnectionError, TimeoutError)),
+            reraise=True
+        )
+        try:
+            # fetch_symbol_data might raise exceptions which are retryable
+            return retryer(self.nse.fetch_symbol_data, symbol, series)
+        except Exception as e:
+            raise e
+
     def get_mainboard_symbols(self) -> List[str]:
         """Fetches Mainboard symbols from CSV."""
         url = "https://nsearchives.nseindia.com/content/equities/EQUITY_L.csv"
@@ -71,29 +85,19 @@ class NSEClient:
 
     def get_industry_info(self, symbol: str, is_sme: bool = False) -> Optional[List[str]]:
         """
-        Fetches industry info for a symbol.
+        Fetches industry info for a symbol using fetch_symbol_data.
         Returns [Macro, Sector, Industry, Basic Industry] or None if not found.
         """
-        url = f"{self.base_url}/NextApi/apiClient/GetQuoteApi"
-
         series_list = ['SM', 'ST'] if is_sme else ['EQ']
 
         for series in series_list:
-            params = {
-                "functionName": "getSymbolData",
-                "marketType": "N",
-                "series": series,
-                "symbol": symbol
-            }
             try:
                 # Add a small delay to be polite
                 time.sleep(0.1)
 
-                response = self._fetch_url(url, params=params)
+                data = self._fetch_symbol_data_with_retry(symbol, series)
 
-                if response.status_code == 200:
-                    data = response.json()
-
+                if data:
                     # Check if valid data
                     if 'equityResponse' in data and len(data['equityResponse']) > 0:
                         sec_info = data['equityResponse'][0].get('secInfo', {})
