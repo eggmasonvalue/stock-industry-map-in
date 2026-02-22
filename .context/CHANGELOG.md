@@ -12,6 +12,9 @@ All notable changes to this project will be documented in this file.
 - **Retry Logic:** Robust `tenacity` integration with configurable backoff strategies.
 - **GitHub Actions:** HTTP/2 optimization for CI environments.
 
+### Fixed
+- **CI Workflow:** Added `git pull --rebase` step to `update_industry_data.yml` to prevent non-fast-forward push errors.
+
 ## [0.1.0] - 2026-02-21
 ### Added
 - Initial repository structure.
