@@ -8,4 +8,5 @@ dependencies = [
     "bse @ git+https://github.com/eggmasonvalue/BseIndiaApi.git",
     "nse @ git+https://github.com/eggmasonvalue/NseIndiaApi.git",
     "tenacity>=8.2.0",
+    "httpx[http2]>=0.25.0",
 ]

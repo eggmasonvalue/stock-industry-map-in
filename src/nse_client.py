@@ -6,11 +6,17 @@ import requests
 from tenacity import Retrying, stop_after_attempt, wait_exponential, retry_if_exception_type
 from nse import NSE
 import os
+import httpx
 
 class NSEClient:
     def __init__(self, download_folder="./temp_downloads"):
         os.makedirs(download_folder, exist_ok=True)
-        self.nse = NSE(download_folder=download_folder)
+        # Auto-detect server mode (GitHub Actions)
+        server_mode = os.environ.get('GITHUB_ACTIONS') == 'true'
+        if server_mode:
+            print("Running in server mode (GitHub Actions detected). Using httpx/http2.")
+
+        self.nse = NSE(download_folder=download_folder, server=server_mode)
         self.base_url = "https://www.nseindia.com/api"
         # Default retry settings (weekly)
         self.max_attempts = 15
@@ -20,12 +26,21 @@ class NSEClient:
         self.max_attempts = max_attempts
         self.max_wait = max_wait
 
+    def _get_retry_exceptions(self):
+        """Returns tuple of exceptions to retry on."""
+        return (
+            requests.exceptions.RequestException,
+            ConnectionError,
+            TimeoutError,
+            httpx.RequestError
+        )
+
     def _fetch_url(self, url, params=None):
         """Fetches a URL with retries."""
         retryer = Retrying(
             stop=stop_after_attempt(self.max_attempts),
             wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
-            retry=retry_if_exception_type((requests.exceptions.RequestException, ConnectionError, TimeoutError)),
+            retry=retry_if_exception_type(self._get_retry_exceptions()),
             reraise=True
         )
         try:
@@ -38,7 +53,7 @@ class NSEClient:
         retryer = Retrying(
             stop=stop_after_attempt(self.max_attempts),
             wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
-            retry=retry_if_exception_type((requests.exceptions.RequestException, ConnectionError, TimeoutError)),
+            retry=retry_if_exception_type(self._get_retry_exceptions()),
             reraise=True
         )
         try:
