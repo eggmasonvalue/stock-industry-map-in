@@ -60,7 +60,7 @@ class Orchestrator:
                 continue
 
             logger.info(f"[{i+1}/{total}] Fetching info for BSE: {symbol} ({scrip_code})")
-            info = self.bse_client.get_industry_info(scrip_code)
+            info = self.bse_client.get_industry_info(scrip_code, symbol=symbol)
 
             if info:
                 self.store.update_stock(symbol, info)
