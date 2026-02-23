@@ -24,7 +24,7 @@ This project is built as a command-line application (CLI) using Python. It orche
 ### 3. `src.store.Store`
 - **Purpose:** Handles data persistence.
 - **Responsibilities:**
-  - Loads and saves data to `industry_data.json`.
+  - Loads and saves data to `out/industry_data.json`.
   - Maintains the data structure:
     ```json
     {
@@ -66,7 +66,7 @@ This project is built as a command-line application (CLI) using Python. It orche
     - Filters for symbols *not* already in `Store` (BSE data takes precedence in this flow).
     - Fetches missing NSE info via `NSEClient`.
     - Repeats for NSE SME symbols.
-3.  **Persistence:** `Store` saves the `data` dictionary to `industry_data.json` periodically and upon completion.
+3.  **Persistence:** `Store` saves the `data` dictionary to `out/industry_data.json` periodically and upon completion.
 
 ## External Dependencies
 

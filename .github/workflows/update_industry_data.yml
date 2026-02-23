@@ -75,4 +75,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: update industry data [skip ci]"
-          file_pattern: "industry_data.json"
+          file_pattern: "out/industry_data.json"

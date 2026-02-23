@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 class Orchestrator:
-    def __init__(self, store_path="industry_data.json", frequency="weekly"):
+    def __init__(self, store_path="out/industry_data.json", frequency="weekly"):
         self.store = Store(filepath=store_path)
         self.nse_client = NSEClient()
         self.bse_client = BSEClient()

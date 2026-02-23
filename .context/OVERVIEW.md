@@ -11,7 +11,7 @@
   - Uses `tenacity` for resilient retry logic with exponential backoff.
   - Handles API rate limits and temporary connection issues.
   - Skips invalid symbols (e.g., Rights Entitlements ending in `-RE`).
-- **Data Persistence:** Stores mappings in a local JSON file (`industry_data.json`) for easy access and portability.
+- **Data Persistence:** Stores mappings in a local JSON file (`out/industry_data.json`) for easy access and portability.
 - **CLI Interface:** Provides command-line arguments for flexible execution:
   - `--refresh`: Updates missing or incomplete data.
   - `--full-refresh`: Rebuilds the database from scratch.

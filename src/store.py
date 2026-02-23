@@ -11,7 +11,7 @@ from typing import Dict, List, Any
 # }
 
 class Store:
-    def __init__(self, filepath: str = "industry_data.json"):
+    def __init__(self, filepath: str = "out/industry_data.json"):
         self.filepath = filepath
         self.metadata = ["Macro", "Sector", "Industry", "Basic Industry"]
         self.data: Dict[str, List[str]] = {}
@@ -42,6 +42,16 @@ class Store:
             "metadata": self.metadata,
             "data": self.data
         }
+
+        # Ensure directory exists
+        directory = os.path.dirname(self.filepath)
+        if directory and not os.path.exists(directory):
+            try:
+                os.makedirs(directory)
+            except OSError as e:
+                print(f"Error creating directory {directory}: {e}")
+                return
+
         with open(self.filepath, 'w', encoding='utf-8') as f:
             json.dump(content, f, indent=2, ensure_ascii=False)
         print(f"Saved data to {self.filepath}")
