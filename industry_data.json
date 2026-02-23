@@ -31319,6 +31319,960 @@
       "Power",
       "Power",
       "Power Generation"
+    ],
+    "SAHAJ": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "SECL": [
+      "Industrials",
+      "Construction",
+      "Construction",
+      "Civil Construction"
+    ],
+    "COLAB": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Other Financial Services"
+    ],
+    "ENCASH": [
+      "Consumer Discretionary",
+      "Media, Entertainment & Publication",
+      "Entertainment",
+      "Film Production, Distribution & Exhibition"
+    ],
+    "SUUMAYA": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "SOFTBPO": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Software",
+      "Computers - Software & Consulting"
+    ],
+    "SASHWAT": [
+      "Commodities",
+      "Construction Materials",
+      "Other Construction Materials",
+      "Other Construction Materials"
+    ],
+    "WARDHEALTH": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "STDSHOE": [
+      "Commodities",
+      "Chemicals",
+      "Chemicals & Petrochemicals",
+      "Specialty Chemicals"
+    ],
+    "ADLINE": [
+      "Healthcare",
+      "Healthcare",
+      "Pharmaceuticals & Biotechnology",
+      "Pharmaceuticals"
+    ],
+    "ASHOKRE": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Agricultural Food & other Products",
+      "Other Agricultural Products"
+    ],
+    "BHATEXT": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "LADIAMO": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Gems, Jewellery And Watches"
+    ],
+    "GFSTEELS": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Iron & Steel Products"
+    ],
+    "JMGCORP": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Plastic Products - Industrial"
+    ],
+    "UNIVAFOODS": [
+      "Consumer Discretionary",
+      "Consumer Services",
+      "Leisure Services",
+      "Hotels & Resorts"
+    ],
+    "QUINTEGRA": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Software",
+      "Computers - Software & Consulting"
+    ],
+    "NEUEON": [
+      "Industrials",
+      "Capital Goods",
+      "Electrical Equipment",
+      "Heavy Electrical Equipment"
+    ],
+    "SWANDEF": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Manufacturing",
+      "Ship Building & Allied Services"
+    ],
+    "ADJIA": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Software",
+      "Computers - Software & Consulting"
+    ],
+    "RRP": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Other Financial Services"
+    ],
+    "AIRLTD": [
+      "Consumer Discretionary",
+      "Realty",
+      "Realty",
+      "Residential, Commercial Projects"
+    ],
+    "MSCTC": [
+      "Commodities",
+      "Metals & Mining",
+      "Non - Ferrous Metals",
+      "Copper"
+    ],
+    "RRPDEFENSE": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "CIL": [
+      "Consumer Discretionary",
+      "Media, Entertainment & Publication",
+      "Media",
+      "Print Media"
+    ],
+    "HARCR": [
+      "Consumer Discretionary",
+      "Automobile and Auto Components",
+      "Auto Components",
+      "Auto Components & Equipments"
+    ],
+    "RAMAPETRO": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "STEELCO": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Iron & Steel Products"
+    ],
+    "PEOPLIN": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Diversified Commercial Services"
+    ],
+    "KARTKIN": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Other Financial Services"
+    ],
+    "RASSIREF": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Manufacturing",
+      "Industrial Products"
+    ],
+    "SW1": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Diversified Commercial Services"
+    ],
+    "SJCORP": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Gems, Jewellery And Watches"
+    ],
+    "INRADIA": [
+      "Consumer Discretionary",
+      "Automobile and Auto Components",
+      "Auto Components",
+      "Auto Components & Equipments"
+    ],
+    "LYNMC": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Manufacturing",
+      "Industrial Products"
+    ],
+    "DECANBRG": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Manufacturing",
+      "Industrial Products"
+    ],
+    "MPCOSEMB": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Manufacturing",
+      "Industrial Products"
+    ],
+    "CAPRO": [
+      "Commodities",
+      "Chemicals",
+      "Chemicals & Petrochemicals",
+      "Commodity Chemicals"
+    ],
+    "SERIND": [
+      "Services",
+      "Services",
+      "Transport Services",
+      "Road Transport"
+    ],
+    "DIAMANT": [
+      "Industrials",
+      "Construction",
+      "Construction",
+      "Civil Construction"
+    ],
+    "PHOTON": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Diversified Commercial Services"
+    ],
+    "PREMCAP": [
+      "Industrials",
+      "Capital Goods",
+      "Electrical Equipment",
+      "Other Electrical Equipment"
+    ],
+    "AXISOL": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Manufacturing",
+      "Industrial Products"
+    ],
+    "AXENTRA": [
+      "Industrials",
+      "Construction",
+      "Construction",
+      "Civil Construction"
+    ],
+    "PREMCAPM": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Investment Company"
+    ],
+    "MATHEWE": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "AVASARA": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "PASUFIN": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "NDMETAL": [
+      "Commodities",
+      "Metals & Mining",
+      "Non - Ferrous Metals",
+      "Copper"
+    ],
+    "AVIVA": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "CAPRICORN": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Diversified Commercial Services"
+    ],
+    "IPOWER": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Services",
+      "IT Enabled Services"
+    ],
+    "POLYTEX": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "ONIXSOLAR": [
+      "Commodities",
+      "Metals & Mining",
+      "Non - Ferrous Metals",
+      "Copper"
+    ],
+    "PMTELELIN": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Iron & Steel Products"
+    ],
+    "SURYVANSP": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "IDM": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Consulting Services"
+    ],
+    "PAEL": [
+      "Consumer Discretionary",
+      "Automobile and Auto Components",
+      "Auto Components",
+      "Auto Components & Equipments"
+    ],
+    "VXLINSTR": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Consumer Electronics"
+    ],
+    "INTEGSW": [
+      "Industrials",
+      "Capital Goods",
+      "Electrical Equipment",
+      "Other Electrical Equipment"
+    ],
+    "CLENON": [
+      "Telecommunication",
+      "Telecommunication",
+      "Telecom -  Equipment & Accessories",
+      "Telecom -  Equipment & Accessories"
+    ],
+    "SHAHFOOD": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Food Products",
+      "Packaged Foods"
+    ],
+    "PIONAGR": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Agricultural Food & other Products",
+      "Edible Oil"
+    ],
+    "SOURCEIND": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "MAXGROW": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Gems, Jewellery And Watches"
+    ],
+    "UNITEDTE": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "KANDAGIRI": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "EMAINDIA": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Manufacturing",
+      "Industrial Products"
+    ],
+    "TMTIND-B1": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Manufacturing",
+      "Industrial Products"
+    ],
+    "FUTURSEC": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "SUNRAJDI": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Gems, Jewellery And Watches"
+    ],
+    "REVAMEDIA": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "BIJHANS": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "SDL": [
+      "Healthcare",
+      "Healthcare",
+      "Pharmaceuticals & Biotechnology",
+      "Pharmaceuticals"
+    ],
+    "DOLPHMED": [
+      "Healthcare",
+      "Healthcare",
+      "Healthcare Services",
+      "Healthcare Service Provider"
+    ],
+    "UNQTYMI": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Packaging"
+    ],
+    "INDOCRED": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "WOODSVILA": [
+      "Consumer Discretionary",
+      "Consumer Services",
+      "Leisure Services",
+      "Hotels & Resorts"
+    ],
+    "SANTOSHF": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "HRMNYCP": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Diversified Commercial Services"
+    ],
+    "OSCARGLO": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Gems, Jewellery And Watches"
+    ],
+    "NUTRICIRCLE": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Food Products",
+      "Other Food Products"
+    ],
+    "PAOS": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Agricultural Food & other Products",
+      "Edible Oil"
+    ],
+    "GSLSEC": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "POPEES": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Garments & Apparels"
+    ],
+    "CARNATIN": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Other Industrial Products"
+    ],
+    "ACEENGITEC": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Services",
+      "IT Enabled Services"
+    ],
+    "KLGCAP": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "ALKA": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "JPTSEC": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "SWADHATURE": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Diversified Commercial Services"
+    ],
+    "OSWALOR": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Agricultural Food & other Products",
+      "Sugar"
+    ],
+    "MENAMANI": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "FILTRON": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "CRESANTO": [
+      "Healthcare",
+      "Healthcare",
+      "Pharmaceuticals & Biotechnology",
+      "Pharmaceuticals"
+    ],
+    "SHAMROIN": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "PROGREXV": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Food Products",
+      "Other Food Products"
+    ],
+    "NIKKIGL": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "CHARMS": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Other Financial Services"
+    ],
+    "ALCHCORP": [
+      "Commodities",
+      "Chemicals",
+      "Chemicals & Petrochemicals",
+      "Commodity Chemicals"
+    ],
+    "KIRANPR": [
+      "Consumer Discretionary",
+      "Media, Entertainment & Publication",
+      "Printing & Publication",
+      "Printing & Publication"
+    ],
+    "OMKAR": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "MAHANIN": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "VASINFRA": [
+      "Consumer Discretionary",
+      "Realty",
+      "Realty",
+      "Residential, Commercial Projects"
+    ],
+    "BJDUP": [
+      "Commodities",
+      "Forest Materials",
+      "Paper, Forest & Jute Products",
+      "Paper & Paper Products"
+    ],
+    "ARISINT": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Software",
+      "Computers - Software & Consulting"
+    ],
+    "ADVIKLA": [
+      "Healthcare",
+      "Healthcare",
+      "Pharmaceuticals & Biotechnology",
+      "Pharmaceuticals"
+    ],
+    "CISTRO": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "RCCEMEN": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Software",
+      "Computers - Software & Consulting"
+    ],
+    "NAGTECH": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Agricultural Food & other Products",
+      "Other Agricultural Products"
+    ],
+    "TACENT": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Gems, Jewellery And Watches"
+    ],
+    "INNOCORP": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Plastic Products - Industrial"
+    ],
+    "KASHYAP": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Services",
+      "IT Enabled Services"
+    ],
+    "HARIGOV": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "INTERDIGI": [
+      "Consumer Discretionary",
+      "Media, Entertainment & Publication",
+      "Entertainment",
+      "Film Production, Distribution & Exhibition"
+    ],
+    "MONIND": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Iron & Steel Products"
+    ],
+    "GTEIT": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Business Process Outsourcing (BPO)/ Knowledge Process Outsourcing (KPO)"
+    ],
+    "OMKARPH": [
+      "Commodities",
+      "Chemicals",
+      "Chemicals & Petrochemicals",
+      "Commodity Chemicals"
+    ],
+    "4THGEN": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Software",
+      "Software Products"
+    ],
+    "MPFSL": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Diversified Commercial Services"
+    ],
+    "SIMPLXMIL": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "META": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Services",
+      "IT Enabled Services"
+    ],
+    "BPCAP": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "OMANSH": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "AANCHALISP": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Iron & Steel Products"
+    ],
+    "SHRINIWAS": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "AANANDALAK": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "ALANSCOTT": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Holding Company"
+    ],
+    "CAPFIN": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "JEL": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "CALLISTA": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "GEETANJ": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "ASYL": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Packaging"
+    ],
+    "AARSHYAM": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "AIHL": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "CHASBRT": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Iron & Steel Products"
+    ],
+    "ARSHIYA": [
+      "Services",
+      "Services",
+      "Transport Services",
+      "Logistics Solution Provider"
+    ],
+    "SILVERO": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Non Banking Financial Company (NBFC)"
+    ],
+    "JAYTEX": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "NNTL": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Diversified Commercial Services"
+    ],
+    "ASHIS": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Iron & Steel Products"
+    ],
+    "KLIFESTYL": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "RAMASIGNS": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "CMICABLES": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Cables - Electricals"
+    ],
+    "PROCAL": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "PRESSURS": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "ACEEDU": [
+      "Consumer Discretionary",
+      "Consumer Services",
+      "Other Consumer Services",
+      "Education"
+    ],
+    "VIJAYTX": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "STURDY": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Plastic Products - Industrial"
+    ],
+    "BARONINF": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Software",
+      "Software Products"
+    ],
+    "RAJVIR": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "EDUCOMP": [
+      "Consumer Discretionary",
+      "Consumer Services",
+      "Other Consumer Services",
+      "Education"
+    ],
+    "GAYAPROJ": [
+      "Industrials",
+      "Construction",
+      "Construction",
+      "Civil Construction"
+    ],
+    "HDIL": [
+      "Consumer Discretionary",
+      "Realty",
+      "Realty",
+      "Residential, Commercial Projects"
+    ],
+    "BGLOBAL": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Services",
+      "IT Enabled Services"
+    ],
+    "VASUDHAGAM": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Agricultural Food & other Products",
+      "Other Agricultural Products"
+    ],
+    "RCL": [
+      "Consumer Discretionary",
+      "Consumer Services",
+      "Retailing",
+      "Distributors"
+    ],
+    "SATAGRI": [
+      "Healthcare",
+      "Healthcare",
+      "Pharmaceuticals & Biotechnology",
+      "Pharmaceuticals"
+    ],
+    "PITHP": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Packaging"
     ]
   }
 }
