@@ -32274,11 +32274,137 @@
       "Industrial Products",
       "Packaging"
     ],
+    "ABMINTLLTD": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "ARVEE": [
+      "Commodities",
+      "Chemicals",
+      "Chemicals & Petrochemicals",
+      "Specialty Chemicals"
+    ],
+    "AURIGROW": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Cables - Electricals"
+    ],
+    "BOHRAIND": [
+      "Commodities",
+      "Chemicals",
+      "Fertilizers & Agrochemicals",
+      "Fertilizers"
+    ],
+    "EASTSILK": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "GLOBAL": [
+      "Consumer Discretionary",
+      "Consumer Services",
+      "Other Consumer Services",
+      "Education"
+    ],
+    "KAPSTON": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Diversified Commercial Services"
+    ],
+    "LAXMICOT": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "MCL": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Investment Company"
+    ],
+    "NIRAJISPAT": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Plastic Products - Consumer"
+    ],
     "PANSARI": [
       "Consumer Discretionary",
       "Realty",
       "Realty",
       "Residential Commercial Projects"
+    ],
+    "PRECOT": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "SANCO": [
+      "SERVICES",
+      "SERVICES",
+      "TRADING",
+      "TRADING"
+    ],
+    "SHRENIK": [
+      "Commodities",
+      "Forest Materials",
+      "Paper Forest & Jute Products",
+      "Paper & Paper Products"
+    ],
+    "SUPREMEENG": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Iron & Steel Products"
+    ],
+    "EXIMROUTES": [
+      "Commodities",
+      "Forest Materials",
+      "Paper Forest & Jute Products",
+      "Paper & Paper Products"
+    ],
+    "SIDDHICOTS": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "GML": [
+      "Healthcare",
+      "Healthcare",
+      "Healthcare Equipment & Supplies",
+      "Medical Equipment & Supplies"
+    ],
+    "TANKUP": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Other Industrial Products"
+    ],
+    "DIVINEHIRA": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Gems Jewellery And Watches"
+    ],
+    "FRESHARA": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Food Products",
+      "Other Food Products"
+    ],
+    "BIKEWO": [
+      "Consumer Discretionary",
+      "Automobile and Auto Components",
+      "Automobiles",
+      "Auto Dealer"
     ],
     "OSELDEVICE": [
       "Healthcare",
@@ -32286,11 +32412,131 @@
       "Healthcare Equipment & Supplies",
       "Medical Equipment & Supplies"
     ],
+    "EXCELLENT": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Other Industrial Products"
+    ],
+    "DHARIWAL": [
+      "Commodities",
+      "Chemicals",
+      "Chemicals & Petrochemicals",
+      "Trading - Chemicals"
+    ],
+    "SATECH": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Software",
+      "Computers - Software & Consulting"
+    ],
     "AIMTRON": [
       "Diversified",
       "Diversified",
       "Diversified",
       "Diversified"
+    ],
+    "BEACON": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Other Financial Services"
+    ],
+    "QUESTLAB": [
+      "Healthcare",
+      "Healthcare",
+      "Pharmaceuticals & Biotechnology",
+      "Pharmaceuticals"
+    ],
+    "TGL": [
+      "Industrials",
+      "Construction",
+      "Construction",
+      "Civil Construction"
+    ],
+    "BLUEPEBBLE": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Diversified Commercial Services"
+    ],
+    "GRAPHISAD": [
+      "Consumer Discretionary",
+      "Media Entertainment & Publication",
+      "Media",
+      "Advertising & Media Agencies"
+    ],
+    "SHEETAL": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Agricultural Food & other Products",
+      "Other Agricultural Products"
+    ],
+    "CBAZAAR": [
+      "Consumer Discretionary",
+      "Consumer Services",
+      "Retailing",
+      "E-Retail/ E-Commerce"
+    ],
+    "ROCKINGDCE": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "KODYTECH": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Software",
+      "Computers - Software & Consulting"
+    ],
+    "CPS": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Garments & Apparels"
+    ],
+    "KDL": [
+      "Telecommunication",
+      "Telecommunication",
+      "Telecom - Services",
+      "Telecom - Infrastructure"
+    ],
+    "DENEERS": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Iron & Steel Products"
+    ],
+    "MCON": [
+      "Commodities",
+      "Construction Materials",
+      "Other Construction Materials",
+      "Other Construction Materials"
+    ],
+    "SYSTANGO": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Software",
+      "Computers - Software & Consulting"
+    ],
+    "MOXSH": [
+      "Consumer Discretionary",
+      "Consumer Services",
+      "Other Consumer Services",
+      "Education"
+    ],
+    "SHIGAN": [
+      "Consumer Discretionary",
+      "Automobile and Auto Components",
+      "Auto Components",
+      "Auto Components & Equipments"
+    ],
+    "SMVD": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Plastic Products - Industrial"
     ],
     "VSCL": [
       "Commodities",
@@ -32303,6 +32549,12 @@
       "Services",
       "Transport Services",
       "Logistics Solution Provider"
+    ],
+    "PERFECT": [
+      "Industrials",
+      "Capital Goods",
+      "Electrical Equipment",
+      "Other Electrical Equipment"
     ],
     "FIL": [
       "Consumer Discretionary",

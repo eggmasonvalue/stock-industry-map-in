@@ -1,6 +1,6 @@
 import logging
 import time
-from typing import List, Set
+from typing import List, Set, Dict
 from src.store import Store
 from src.nse_client import NSEClient
 from src.bse_client import BSEClient
@@ -27,23 +27,30 @@ class Orchestrator:
         self.nse_client.set_retry_config(**config)
         self.bse_client.set_retry_config(**config)
 
-    def _process_nse_securities(self, symbols: List[str], is_sme: bool):
-        total = len(symbols)
-        logger.info(f"Processing {total} NSE symbols (SME={is_sme})...")
+    def _process_nse_securities(self, securities: List[Dict[str, str]]):
+        """
+        Process a list of NSE securities.
+        Each item is a dict: {'symbol': '...', 'series': '...'}
+        """
+        total = len(securities)
+        logger.info(f"Processing {total} NSE symbols...")
 
-        for i, symbol in enumerate(symbols):
+        for i, item in enumerate(securities):
+            symbol = item['symbol']
+            series = item['series']
+
             if symbol in self.store.data and self.store.data[symbol]:
-                # Already processed (e.g. by BSE or previous run if logic changed)
+                # Already processed
                 continue
 
-            logger.info(f"[{i+1}/{total}] Fetching info for NSE: {symbol}")
-            info = self.nse_client.get_industry_info(symbol, is_sme=is_sme)
+            logger.info(f"[{i+1}/{total}] Fetching info for NSE: {symbol} ({series})")
+            info = self.nse_client.get_industry_info(symbol, series=series)
 
             if info:
                 self.store.update_stock(symbol, info)
                 logger.info(f"Updated {symbol}: {info}")
             else:
-                logger.warning(f"No info found for NSE: {symbol}")
+                logger.warning(f"No info found for NSE: {symbol} ({series})")
 
             if (i + 1) % 50 == 0:
                 self.store.save()
@@ -82,21 +89,22 @@ class Orchestrator:
         # NSE Mainboard
         # Optimization: process only if NOT already in store (populated by BSE)
         nse_main = self.nse_client.get_mainboard_symbols()
-        nse_main_missing = [s for s in nse_main if s not in self.store.data or not self.store.data[s]]
+        # nse_main is list of {'symbol': ..., 'series': ...}
+        nse_main_missing = [s for s in nse_main if s['symbol'] not in self.store.data or not self.store.data[s['symbol']]]
 
         if nse_main_missing:
             logger.info(f"Found {len(nse_main_missing)} missing/incomplete NSE Mainboard symbols (after BSE processing).")
-            self._process_nse_securities(nse_main_missing, is_sme=False)
+            self._process_nse_securities(nse_main_missing)
         else:
             logger.info("All NSE Mainboard symbols already covered by BSE data.")
 
         # NSE SME
         nse_sme = self.nse_client.get_sme_symbols()
-        nse_sme_missing = [s for s in nse_sme if s not in self.store.data or not self.store.data[s]]
+        nse_sme_missing = [s for s in nse_sme if s['symbol'] not in self.store.data or not self.store.data[s['symbol']]]
 
         if nse_sme_missing:
             logger.info(f"Found {len(nse_sme_missing)} missing/incomplete NSE SME symbols (after BSE processing).")
-            self._process_nse_securities(nse_sme_missing, is_sme=True)
+            self._process_nse_securities(nse_sme_missing)
         else:
              logger.info("All NSE SME symbols already covered by BSE data.")
 
@@ -109,17 +117,17 @@ class Orchestrator:
 
         # NSE Mainboard
         nse_main = self.nse_client.get_mainboard_symbols()
-        nse_main_missing = [s for s in nse_main if s not in self.store.data or not self.store.data[s]]
+        nse_main_missing = [s for s in nse_main if s['symbol'] not in self.store.data or not self.store.data[s['symbol']]]
         if nse_main_missing:
             logger.info(f"Found {len(nse_main_missing)} missing/incomplete NSE Mainboard symbols.")
-            self._process_nse_securities(nse_main_missing, is_sme=False)
+            self._process_nse_securities(nse_main_missing)
 
         # NSE SME
         nse_sme = self.nse_client.get_sme_symbols()
-        nse_sme_missing = [s for s in nse_sme if s not in self.store.data or not self.store.data[s]]
+        nse_sme_missing = [s for s in nse_sme if s['symbol'] not in self.store.data or not self.store.data[s['symbol']]]
         if nse_sme_missing:
             logger.info(f"Found {len(nse_sme_missing)} missing/incomplete NSE SME symbols.")
-            self._process_nse_securities(nse_sme_missing, is_sme=True)
+            self._process_nse_securities(nse_sme_missing)
 
         # BSE
         bse_secs = self.bse_client.get_securities()
