@@ -1,7 +1,7 @@
 import time
 from typing import Dict, List, Optional
 import requests
-from tenacity import Retrying, stop_after_attempt, wait_exponential, retry_if_exception_type
+from tenacity import Retrying, stop_after_attempt, wait_exponential, retry_if_exception
 from bse import BSE
 import os
 
@@ -17,12 +17,33 @@ class BSEClient:
         self.max_attempts = max_attempts
         self.max_wait = max_wait
 
+    def _is_retryable_exception(self, exception):
+        """
+        Checks if an exception is retryable based on strict criteria.
+
+        Retry ONLY if:
+        1. Exception is TimeoutError.
+        2. Exception is ConnectionError AND status code is 429, 503, 408, 502, or 504.
+        """
+        if isinstance(exception, TimeoutError):
+            return True
+
+        if isinstance(exception, ConnectionError):
+            msg = str(exception)
+            # Retry on specific status codes
+            if any(code in msg for code in ["429", "503", "408", "502", "504"]):
+                return True
+            # Explicitly fail on others (400, 401, 403, 404, 500, etc.)
+            return False
+
+        return False
+
     def _fetch_securities(self, group='A'):
         """Fetches securities with retry."""
         retryer = Retrying(
             stop=stop_after_attempt(self.max_attempts),
             wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
-            retry=retry_if_exception_type((requests.exceptions.RequestException, ConnectionError, TimeoutError)),
+            retry=retry_if_exception(self._is_retryable_exception),
             reraise=True
         )
         try:
@@ -35,7 +56,7 @@ class BSEClient:
         retryer = Retrying(
             stop=stop_after_attempt(self.max_attempts),
             wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
-            retry=retry_if_exception_type((requests.exceptions.RequestException, ConnectionError, TimeoutError)),
+            retry=retry_if_exception(self._is_retryable_exception),
             reraise=True
         )
         try:

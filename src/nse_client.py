@@ -26,22 +26,26 @@ class NSEClient:
         self.max_attempts = max_attempts
         self.max_wait = max_wait
 
-    def _get_retry_exceptions(self):
-        """Returns tuple of exceptions to retry on."""
-        return (
-            requests.exceptions.RequestException,
-            ConnectionError,
-            TimeoutError,
-            httpx.RequestError
-        )
-
     def _is_retryable_exception(self, exception):
-        """Checks if an exception is retryable."""
-        # Check if it's a 404 ConnectionError (which NSE library raises for Not Found)
-        if isinstance(exception, ConnectionError) and "404" in str(exception):
+        """
+        Checks if an exception is retryable based on strict criteria.
+
+        Retry ONLY if:
+        1. Exception is TimeoutError.
+        2. Exception is ConnectionError AND status code is 429, 503, 408, 502, or 504.
+        """
+        if isinstance(exception, TimeoutError):
+            return True
+
+        if isinstance(exception, ConnectionError):
+            msg = str(exception)
+            # Retry on specific status codes
+            if any(code in msg for code in ["429", "503", "408", "502", "504"]):
+                return True
+            # Explicitly fail on others (400, 401, 403, 404, 500, etc.)
             return False
-        # Retry on other ConnectionErrors, RequestExceptions, Timeouts, etc.
-        return isinstance(exception, self._get_retry_exceptions())
+
+        return False
 
     def _fetch_url(self, url, params=None):
         """Fetches a URL with retries."""
@@ -56,45 +60,35 @@ class NSEClient:
         except Exception as e:
             raise e
 
-    def _fetch_symbol_data_with_retry(self, symbol, series):
-        """Fetches symbol data with retries using fetch_symbol_data."""
+    def _fetch_symbol_data_fallback(self, symbol, series_list):
+        """
+        Fetches symbol data with retries, trying a list of series in order.
+        If a series returns 404, moves to the next one.
+        If a retryable error occurs (after retries), it raises the exception.
+        """
         retryer = Retrying(
             stop=stop_after_attempt(self.max_attempts),
             wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
             retry=retry_if_exception(self._is_retryable_exception),
             reraise=True
         )
-        try:
-            # fetch_symbol_data might raise exceptions which are retryable
-            return retryer(self.nse.fetch_symbol_data, symbol, series)
-        except Exception as e:
-            raise e
 
-    def _fetch_sme_data(self, symbol):
-        """
-        Tries to fetch data for SME symbol.
-        Tries 'SM' series first. If 404, tries 'ST' series.
-        """
-        try:
-            return self.nse.fetch_symbol_data(symbol, 'SM')
-        except ConnectionError as e:
-            if "404" in str(e):
-                # SM not found, try ST
-                return self.nse.fetch_symbol_data(symbol, 'ST')
-            raise e
+        for series in series_list:
+            try:
+                # getDetailedScripData might raise exceptions which are retryable
+                return retryer(self.nse.getDetailedScripData, symbol, series)
+            except ConnectionError as e:
+                # If 404, try next series
+                if "404" in str(e):
+                    continue
+                # If other ConnectionError (and retries exhausted), raise it
+                raise e
+            except Exception as e:
+                # Raise other exceptions
+                raise e
 
-    def _fetch_sme_data_with_retry(self, symbol):
-        """Fetches SME symbol data with retries."""
-        retryer = Retrying(
-            stop=stop_after_attempt(self.max_attempts),
-            wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
-            retry=retry_if_exception(self._is_retryable_exception),
-            reraise=True
-        )
-        try:
-            return retryer(self._fetch_sme_data, symbol)
-        except Exception as e:
-            raise e
+        # If we exhausted all series and they all were 404
+        raise ConnectionError(f"404 Client Error: Not Found for all series: {series_list} for symbol {symbol}")
 
     def get_mainboard_symbols(self) -> List[str]:
         """Fetches Mainboard symbols from CSV."""
@@ -134,7 +128,7 @@ class NSEClient:
 
     def get_industry_info(self, symbol: str, is_sme: bool = False) -> Optional[List[str]]:
         """
-        Fetches industry info for a symbol using fetch_symbol_data.
+        Fetches industry info for a symbol using getDetailedScripData.
         Returns [Macro, Sector, Industry, Basic Industry] or None if not found.
         """
         if symbol.endswith('-RE'):
@@ -166,10 +160,12 @@ class NSEClient:
 
         try:
             if is_sme:
-                data = self._fetch_sme_data_with_retry(symbol)
+                # Try SME series
+                data = self._fetch_symbol_data_fallback(symbol, ['SM', 'ST', 'SZ'])
                 return extract_info(data)
             else:
-                data = self._fetch_symbol_data_with_retry(symbol, 'EQ')
+                # Try Mainboard series
+                data = self._fetch_symbol_data_fallback(symbol, ['EQ', 'BE', 'BZ'])
                 return extract_info(data)
         except Exception:
             # Log error but continue
