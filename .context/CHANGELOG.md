@@ -17,9 +17,6 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - **Data Location:** Moved `industry_data.json` to `out/` directory.
-- **Retry Logic:** Implemented strict retry predicate for NSE and BSE clients (retries only on `TimeoutError` and specific `ConnectionError` codes: 429, 503, 408, 502, 504).
-- **NSE Fallback:** Implemented Series Fallback Logic for NSE symbol fetching (Mainboard: EQ->BE->BZ, SME: SM->ST->SZ).
-- **Dependency Update:** Updated `nse` dependency to use `getDetailedScripData`.
 
 ## [0.1.0] - 2026-02-21
 ### Added
