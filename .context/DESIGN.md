@@ -14,7 +14,7 @@ This document tracks the implementation status of key features and outlines the 
   - [x] Fetch SME symbols (CSV)
   - [x] Fetch industry info (`getDetailedScripData`)
   - [x] Retry logic (strict predicate)
-  - [x] Series fallback logic (EQ/BE/BZ, SM/ST/SZ)
+  - [x] Direct series extraction from CSV (SERIES column)
   - [x] GitHub Actions optimization (`httpx`)
 - [x] **Data Fetching (BSE)**
   - [x] `BSEClient` implementation using `BseIndiaApi`
@@ -39,10 +39,8 @@ In `full_refresh` mode, **BSE data is fetched first**. NSE data is only fetched 
 - **Trade-off:** If NSE has better industry classification for dual-listed stocks, it is currently ignored in this mode.
 
 ### 2. NSE Symbol Fetching
-NSE symbols are fetched using a prioritized fallback series list.
-- **Mainboard:** Tries `['EQ', 'BE', 'BZ']` in order.
-- **SME:** Tries `['SM', 'ST', 'SZ']` in order.
-- **Why:** Ensures complete coverage for symbols listed under different series.
+NSE symbols and their specific series (e.g., `EQ`, `BE`, `SM`, `ST`) are extracted directly from the source CSVs (`EQUITY_L.csv` and `SME_EQUITY_L.csv`).
+- **Why:** This eliminates the need for guessing the series or trying multiple fallbacks, which reduces unnecessary API calls (404s) and improves reliability for symbols like `KAPSTON` (listed as `BE`).
 
 ### 3. Error Handling
 Both NSE and BSE clients implement a strict retry policy.

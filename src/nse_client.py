@@ -3,7 +3,7 @@ import io
 import time
 from typing import Dict, List, Optional
 import requests
-from tenacity import Retrying, stop_after_attempt, wait_exponential, retry_if_exception_type, retry_if_exception
+from tenacity import Retrying, stop_after_attempt, wait_exponential, retry_if_exception
 from nse import NSE
 import os
 import httpx
@@ -60,47 +60,42 @@ class NSEClient:
         except Exception as e:
             raise e
 
-    def _fetch_symbol_data_fallback(self, symbol, series_list):
-        """
-        Fetches symbol data with retries, trying a list of series in order.
-        If a series returns 404, moves to the next one.
-        If a retryable error occurs (after retries), it raises the exception.
-        """
+    def _fetch_detailed_scrip_data_with_retry(self, symbol: str, series: str):
+        """Fetches detailed scrip data with retries."""
         retryer = Retrying(
             stop=stop_after_attempt(self.max_attempts),
             wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
             retry=retry_if_exception(self._is_retryable_exception),
             reraise=True
         )
+        try:
+            return retryer(self.nse.getDetailedScripData, symbol, series)
+        except Exception as e:
+            raise e
 
-        for series in series_list:
-            try:
-                # getDetailedScripData might raise exceptions which are retryable
-                return retryer(self.nse.getDetailedScripData, symbol, series)
-            except ConnectionError as e:
-                # If 404, try next series
-                if "404" in str(e):
-                    continue
-                # If other ConnectionError (and retries exhausted), raise it
-                raise e
-            except Exception as e:
-                # Raise other exceptions
-                raise e
-
-        # If we exhausted all series and they all were 404
-        raise ConnectionError(f"404 Client Error: Not Found for all series: {series_list} for symbol {symbol}")
-
-    def get_mainboard_symbols(self) -> List[str]:
-        """Fetches Mainboard symbols from CSV."""
+    def get_mainboard_symbols(self) -> List[Dict[str, str]]:
+        """Fetches Mainboard symbols and series from CSV."""
         url = "https://nsearchives.nseindia.com/content/equities/EQUITY_L.csv"
         print(f"Fetching Mainboard CSV from {url}...")
         try:
             response = self._fetch_url(url)
             if response.status_code == 200:
                 csv_content = response.content.decode('utf-8')
-                reader = csv.DictReader(io.StringIO(csv_content))
-                symbols = [row['SYMBOL'] for row in reader]
-                return symbols
+                # Sometimes headers have leading/trailing spaces, strip them
+                lines = csv_content.splitlines()
+                if lines:
+                    headers = [h.strip() for h in lines[0].split(',')]
+                    # Reconstruct with clean headers
+                    cleaned_content = ','.join(headers) + '\n' + '\n'.join(lines[1:])
+                    reader = csv.DictReader(io.StringIO(cleaned_content))
+
+                    symbols = []
+                    for row in reader:
+                        symbol = row.get('SYMBOL')
+                        series = row.get('SERIES')
+                        if symbol and series:
+                            symbols.append({'symbol': symbol, 'series': series})
+                    return symbols
             else:
                 print(f"Failed to fetch Mainboard CSV: {response.status_code}")
                 return []
@@ -108,17 +103,27 @@ class NSEClient:
             print(f"Error fetching Mainboard CSV: {e}")
             return []
 
-    def get_sme_symbols(self) -> List[str]:
-        """Fetches SME symbols from CSV."""
+    def get_sme_symbols(self) -> List[Dict[str, str]]:
+        """Fetches SME symbols and series from CSV."""
         url = "https://nsearchives.nseindia.com/emerge/corporates/content/SME_EQUITY_L.csv"
         print(f"Fetching SME CSV from {url}...")
         try:
             response = self._fetch_url(url)
             if response.status_code == 200:
                 csv_content = response.content.decode('utf-8')
-                reader = csv.DictReader(io.StringIO(csv_content))
-                symbols = [row['SYMBOL'] for row in reader]
-                return symbols
+                lines = csv_content.splitlines()
+                if lines:
+                    headers = [h.strip() for h in lines[0].split(',')]
+                    cleaned_content = ','.join(headers) + '\n' + '\n'.join(lines[1:])
+                    reader = csv.DictReader(io.StringIO(cleaned_content))
+
+                    symbols = []
+                    for row in reader:
+                        symbol = row.get('SYMBOL')
+                        series = row.get('SERIES')
+                        if symbol and series:
+                            symbols.append({'symbol': symbol, 'series': series})
+                    return symbols
             else:
                 print(f"Failed to fetch SME CSV: {response.status_code}")
                 return []
@@ -126,9 +131,10 @@ class NSEClient:
             print(f"Error fetching SME CSV: {e}")
             return []
 
-    def get_industry_info(self, symbol: str, is_sme: bool = False) -> Optional[List[str]]:
+    def get_industry_info(self, symbol: str, series: str) -> Optional[List[str]]:
         """
         Fetches industry info for a symbol using getDetailedScripData.
+        Requires the correct series (e.g., 'EQ', 'BE', 'SM', 'ST').
         Returns [Macro, Sector, Industry, Basic Industry] or None if not found.
         """
         if symbol.endswith('-RE'):
@@ -159,14 +165,9 @@ class NSEClient:
         time.sleep(0.1)
 
         try:
-            if is_sme:
-                # Try SME series
-                data = self._fetch_symbol_data_fallback(symbol, ['SM', 'ST', 'SZ'])
-                return extract_info(data)
-            else:
-                # Try Mainboard series
-                data = self._fetch_symbol_data_fallback(symbol, ['EQ', 'BE', 'BZ'])
-                return extract_info(data)
+            # Directly use the provided series
+            data = self._fetch_detailed_scrip_data_with_retry(symbol, series)
+            return extract_info(data)
         except Exception:
             # Log error but continue
             # print(f"Error fetching info for {symbol}: {e}")
