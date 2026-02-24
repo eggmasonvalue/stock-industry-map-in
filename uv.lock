@@ -203,7 +203,7 @@ wheels = [
 [[package]]
 name = "nse"
 version = "2.0.0"
-source = { git = "https://github.com/eggmasonvalue/NseIndiaApi.git#303ca3723777797a6f3b9410ed7f45cbf7b4451b" }
+source = { git = "https://github.com/eggmasonvalue/NseIndiaApi.git#9e008b06a277fd10d2483e697908e682de437096" }
 dependencies = [
     { name = "mthrottle" },
 ]
