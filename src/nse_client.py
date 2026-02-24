@@ -60,8 +60,8 @@ class NSEClient:
         except Exception as e:
             raise e
 
-    def _fetch_detailed_scrip_data_with_retry(self, symbol: str, series: str):
-        """Fetches detailed scrip data with retries."""
+    def _fetch_detailed_scrip_data_with_retry(self, symbol: str, series: str, market_type: str = "N"):
+        """Fetches detailed scrip data with retries and optional market type."""
         retryer = Retrying(
             stop=stop_after_attempt(self.max_attempts),
             wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
@@ -69,7 +69,7 @@ class NSEClient:
             reraise=True
         )
         try:
-            return retryer(self.nse.getDetailedScripData, symbol, series)
+            return retryer(self.nse.getDetailedScripData, symbol, series, marketType=market_type)
         except Exception as e:
             raise e
 
@@ -94,7 +94,7 @@ class NSEClient:
                         symbol = row.get('SYMBOL')
                         series = row.get('SERIES')
                         if symbol and series:
-                            symbols.append({'symbol': symbol, 'series': series})
+                            symbols.append({'symbol': symbol.strip(), 'series': series.strip()})
                     return symbols
             else:
                 print(f"Failed to fetch Mainboard CSV: {response.status_code}")
@@ -122,7 +122,7 @@ class NSEClient:
                         symbol = row.get('SYMBOL')
                         series = row.get('SERIES')
                         if symbol and series:
-                            symbols.append({'symbol': symbol, 'series': series})
+                            symbols.append({'symbol': symbol.strip(), 'series': series.strip()})
                     return symbols
             else:
                 print(f"Failed to fetch SME CSV: {response.status_code}")
@@ -135,6 +135,7 @@ class NSEClient:
         """
         Fetches industry info for a symbol using getDetailedScripData.
         Requires the correct series (e.g., 'EQ', 'BE', 'SM', 'ST').
+        Tries marketType="N" first, then "G" if data is missing.
         Returns [Macro, Sector, Industry, Basic Industry] or None if not found.
         """
         if symbol.endswith('-RE'):
@@ -143,7 +144,11 @@ class NSEClient:
         def extract_info(data):
             # Check if valid data
             if 'equityResponse' in data and len(data['equityResponse']) > 0:
-                sec_info = data['equityResponse'][0].get('secInfo', {})
+                sec_info = data['equityResponse'][0].get('secInfo')
+
+                # Check if secInfo is None (which happens for marketType mismatch)
+                if not sec_info:
+                    return None
 
                 # Extract fields
                 macro = sec_info.get('macro')
@@ -165,9 +170,18 @@ class NSEClient:
         time.sleep(0.1)
 
         try:
-            # Directly use the provided series
-            data = self._fetch_detailed_scrip_data_with_retry(symbol, series)
-            return extract_info(data)
+            # Try Normal Market first (N)
+            data = self._fetch_detailed_scrip_data_with_retry(symbol, series, market_type="N")
+            info = extract_info(data)
+
+            if info:
+                return info
+
+            # If failed (None), try Periodic Call Auction Market (G)
+            # print(f"Retrying {symbol} ({series}) with marketType='G'...")
+            data_g = self._fetch_detailed_scrip_data_with_retry(symbol, series, market_type="G")
+            return extract_info(data_g)
+
         except Exception:
             # Log error but continue
             # print(f"Error fetching info for {symbol}: {e}")
