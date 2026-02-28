@@ -16,7 +16,7 @@ class NSEClient:
         if server_mode:
             print("Running in server mode (GitHub Actions detected). Using httpx/http2.")
 
-        self.nse = NSE(download_folder=download_folder, server=server_mode)
+        self.nse = NSE(download_folder=download_folder, server=True)
         self.base_url = "https://www.nseindia.com/api"
         # Default retry settings (weekly)
         self.max_attempts = 15

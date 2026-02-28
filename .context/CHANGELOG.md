@@ -17,6 +17,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - **Data Location:** Moved `industry_data.json` to `out/` directory.
+- **Dependencies:** Upgraded `bse` to `>=3.2.0` and `nse` to `nse[server]>=2.1.0`.
+- **Reliability:** Enabled `server=True` in `NSE` initialization to force HTTP/2 usage for improved stability.
 - **Retry Logic:** Implemented strict retry predicate for NSE and BSE clients (retries only on `TimeoutError` and specific `ConnectionError` codes: 429, 503, 408, 502, 504).
 - **NSE Fetching:** Updated NSE fetching to extract series information directly from source CSVs and pass it to `getDetailedScripData`, eliminating the need for complex fallback logic and reducing 404 errors.
 - **Dependency Update:** Updated `nse` dependency to use `getDetailedScripData`.
