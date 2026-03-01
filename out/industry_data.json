@@ -32573,6 +32573,30 @@
       "Forest Materials",
       "Paper, Forest & Jute Products",
       "Paper & Paper Products"
+    ],
+    "GAUDIUMIVF": [
+      "Healthcare",
+      "Healthcare",
+      "Healthcare Services",
+      "Healthcare Service Provider"
+    ],
+    "LTM": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Software",
+      "Computers - Software & Consulting"
+    ],
+    "MANILAM": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Plywood Boards/ Laminates"
+    ],
+    "YASHHTEJ": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Agricultural Food & other Products",
+      "Edible Oil"
     ]
   }
 }
