@@ -32597,6 +32597,66 @@
       "Fast Moving Consumer Goods",
       "Agricultural Food & other Products",
       "Edible Oil"
+    ],
+    "BHANDA-RE2": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "CLEANMAX": [
+      "Utilities",
+      "Power",
+      "Power",
+      "Power Generation"
+    ],
+    "HILTON-RE2": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Castings & Forgings"
+    ],
+    "OMNI": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Manufacturing",
+      "Industrial Products"
+    ],
+    "PNGSREVA": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Gems Jewellery And Watches"
+    ],
+    "SRTL": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "STRIDERS": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Leisure Products"
+    ],
+    "YAAP": [
+      "Consumer Discretionary",
+      "Media Entertainment & Publication",
+      "Media",
+      "Advertising & Media Agencies"
+    ],
+    "MOBILISE": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Software",
+      "Software Products"
+    ],
+    "ACCORDTS": [
+      "Industrials",
+      "Capital Goods",
+      "Electrical Equipment",
+      "Heavy Electrical Equipment"
     ]
   }
 }
