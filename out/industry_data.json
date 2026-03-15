@@ -32657,6 +32657,24 @@
       "Capital Goods",
       "Electrical Equipment",
       "Heavy Electrical Equipment"
+    ],
+    "SEDEMAC": [
+      "Consumer Discretionary",
+      "Automobile and Auto Components",
+      "Auto Components",
+      "Auto Components & Equipments"
+    ],
+    "SPCON": [
+      "Industrials",
+      "Construction",
+      "Construction",
+      "Civil Construction"
+    ],
+    "ACETEC": [
+      "Consumer Discretionary",
+      "Consumer Services",
+      "Retailing",
+      "E-Retail/ E-Commerce"
     ]
   }
 }
