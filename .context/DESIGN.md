@@ -30,6 +30,8 @@ This document tracks the implementation status of key features and outlines the 
 - [x] **Data Persistence**
   - [x] `Store` implementation (JSON load/save)
   - [x] Consistent schema (`Macro`, `Sector`, `Industry`, `Basic Industry`)
+- [x] **Testing**
+  - [x] `Store.update_stock` coverage (valid/invalid lengths, overwriting)
 
 ## Design Decisions
 

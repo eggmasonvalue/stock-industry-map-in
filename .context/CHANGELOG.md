@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Added
+- **Testing:** Added `tests/test_store.py` with comprehensive tests for `Store.update_stock`.
 - **Core Functionality:** Implemented `main.py`, `src/orchestrator.py`, `src/store.py`, `src/nse_client.py`, and `src/bse_client.py`.
 - **NSE Support:** Full implementation of `NSEClient` with Mainboard and SME support.
 - **BSE Support:** Full implementation of `BSEClient` iterating all security groups.
