@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
 - **Retry Logic:** Implemented strict retry predicate for NSE and BSE clients (retries only on `TimeoutError` and specific `ConnectionError` codes: 429, 503, 408, 502, 504).
 - **NSE Fetching:** Updated NSE fetching to extract series information directly from source CSVs and pass it to `getDetailedScripData`, eliminating the need for complex fallback logic and reducing 404 errors.
 - **Dependency Update:** Updated `nse` dependency to use `getDetailedScripData`.
+- **Code Health:** Removed unused `Any` import in `src/store.py`.
 
 ## [0.1.0] - 2026-02-21
 ### Added
