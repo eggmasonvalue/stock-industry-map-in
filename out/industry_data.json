@@ -32675,6 +32675,48 @@
       "Consumer Services",
       "Retailing",
       "E-Retail/ E-Commerce"
+    ],
+    "RSL": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Iron & Steel Products"
+    ],
+    "SINGERIND": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Household Appliances"
+    ],
+    "APSISAERO": [
+      "Industrials",
+      "Capital Goods",
+      "Aerospace & Defense",
+      "Aerospace & Defense"
+    ],
+    "ELFIN": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Food Products",
+      "Other Food Products"
+    ],
+    "GSLTD": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Food Products",
+      "Packaged Foods"
+    ],
+    "NWIL": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Holding Company"
+    ],
+    "GBLINFRA": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Diversified Commercial Services"
     ]
   }
 }
