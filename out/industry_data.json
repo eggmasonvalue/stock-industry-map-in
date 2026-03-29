@@ -32717,6 +32717,48 @@
       "Services",
       "Commercial Services & Supplies",
       "Diversified Commercial Services"
+    ],
+    "GSPCROP": [
+      "Commodities",
+      "Chemicals",
+      "Fertilizers & Agrochemicals",
+      "Pesticides & Agrochemicals"
+    ],
+    "INNOVISION": [
+      "Services",
+      "Services",
+      "Transport Infrastructure",
+      "Road Assets - Toll Annuity Hybrid-Annuity"
+    ],
+    "NOVUS": [
+      "Consumer Discretionary",
+      "Media, Entertainment & Publication",
+      "Media",
+      "Web based media and service"
+    ],
+    "HIIL": [
+      "Industrials",
+      "Capital Goods",
+      "Electrical Equipment",
+      "Other Electrical Equipment"
+    ],
+    "BELDING": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Aluminium, Copper & Zinc Products"
+    ],
+    "KALIND": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Diversified Commercial Services"
+    ],
+    "GKL": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Gems, Jewellery And Watches"
     ]
   }
 }
