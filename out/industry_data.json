@@ -32759,6 +32759,36 @@
       "Consumer Durables",
       "Consumer Durables",
       "Gems, Jewellery And Watches"
+    ],
+    "AMIRCHAND": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Agricultural Food & other Products",
+      "Other Agricultural Products"
+    ],
+    "CMPDI": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Consulting Services"
+    ],
+    "LANDSMILL": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "POWERICA": [
+      "Industrials",
+      "Capital Goods",
+      "Electrical Equipment",
+      "Heavy Electrical Equipment"
+    ],
+    "SAIPARENT": [
+      "Healthcare",
+      "Healthcare",
+      "Pharmaceuticals & Biotechnology",
+      "Pharmaceuticals"
     ]
   }
 }
