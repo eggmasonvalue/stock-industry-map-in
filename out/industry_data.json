@@ -32789,6 +32789,48 @@
       "Healthcare",
       "Pharmaceuticals & Biotechnology",
       "Pharmaceuticals"
+    ],
+    "AHLWEST": [
+      "Consumer Discretionary",
+      "Consumer Services",
+      "Leisure Services",
+      "Hotels & Resorts"
+    ],
+    "VIVIDEL": [
+      "Industrials",
+      "Capital Goods",
+      "Electrical Equipment",
+      "Other Electrical Equipment"
+    ],
+    "KIAASA": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Garments & Apparels"
+    ],
+    "TIPCO": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Manufacturing",
+      "Industrial Products"
+    ],
+    "JOJO": [
+      "Consumer Discretionary",
+      "Media, Entertainment & Publication",
+      "Entertainment",
+      "Film Production, Distribution & Exhibition"
+    ],
+    "DEEPAI": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Gems, Jewellery And Watches"
+    ],
+    "VIKSHEN": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
     ]
   }
 }
