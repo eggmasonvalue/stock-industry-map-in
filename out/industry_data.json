@@ -32831,6 +32831,48 @@
       "Services",
       "Commercial Services & Supplies",
       "Trading & Distributors"
+    ],
+    "JSWDULUX": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Paints"
+    ],
+    "OMPOWER": [
+      "Industrials",
+      "Construction",
+      "Construction",
+      "Civil Construction"
+    ],
+    "CHCL": [
+      "Healthcare",
+      "Healthcare",
+      "Pharmaceuticals & Biotechnology",
+      "Pharmaceuticals"
+    ],
+    "SCDL": [
+      "Industrials",
+      "Construction",
+      "Construction",
+      "Civil Construction"
+    ],
+    "EMIAC": [
+      "Consumer Discretionary",
+      "Media, Entertainment & Publication",
+      "Media",
+      "Web based media and service"
+    ],
+    "ASGARD": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Diversified Commercial Services"
+    ],
+    "GARWAOFFS": [
+      "Services",
+      "Services",
+      "Transport Services",
+      "Shipping"
     ]
   }
 }
