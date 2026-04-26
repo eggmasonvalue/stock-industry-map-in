@@ -32873,6 +32873,72 @@
       "Services",
       "Transport Services",
       "Shipping"
+    ],
+    "AVATAR": [
+      "Consumer Discretionary",
+      "Automobile and Auto Components",
+      "Auto Components",
+      "Auto Components & Equipments"
+    ],
+    "HIGHNESS": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Manufacturing",
+      "Industrial Products"
+    ],
+    "SPML": [
+      "Healthcare",
+      "Healthcare",
+      "Pharmaceuticals & Biotechnology",
+      "Pharmaceuticals"
+    ],
+    "MTL": [
+      "Consumer Discretionary",
+      "Consumer Services",
+      "Retailing",
+      "Speciality Retail"
+    ],
+    "FOSECOC": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Electrodes & Refractories"
+    ],
+    "MADALA": [
+      "Consumer Discretionary",
+      "Realty",
+      "Realty",
+      "Real Estate related services"
+    ],
+    "HBGHOTELS": [
+      "Consumer Discretionary",
+      "Consumer Services",
+      "Leisure Services",
+      "Hotels & Resorts"
+    ],
+    "GDIL": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Gems, Jewellery And Watches"
+    ],
+    "JAIHIND": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "CCME": [
+      "Healthcare",
+      "Healthcare",
+      "Pharmaceuticals & Biotechnology",
+      "Biotechnology"
+    ],
+    "HOM": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Gems, Jewellery And Watches"
     ]
   }
 }
