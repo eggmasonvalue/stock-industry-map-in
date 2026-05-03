@@ -32939,6 +32939,42 @@
       "Consumer Durables",
       "Consumer Durables",
       "Gems, Jewellery And Watches"
+    ],
+    "HEALTHX": [
+      "Healthcare",
+      "Healthcare",
+      "Healthcare Services",
+      "Healthcare Service Provider"
+    ],
+    "ADISOFT": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Manufacturing",
+      "Industrial Products"
+    ],
+    "GYFTR": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Other Financial Services"
+    ],
+    "DESIFARMS": [
+      "Services",
+      "Services",
+      "Transport Services",
+      "Road Transport"
+    ],
+    "NEWMKTAVE": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Software",
+      "Software Products"
+    ],
+    "JTLDEFENCE": [
+      "Industrials",
+      "Capital Goods",
+      "Aerospace & Defense",
+      "Aerospace & Defense"
     ]
   }
 }
