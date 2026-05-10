@@ -32975,6 +32975,36 @@
       "Capital Goods",
       "Aerospace & Defense",
       "Aerospace & Defense"
+    ],
+    "GRADIENTE": [
+      "Consumer Discretionary",
+      "Media Entertainment & Publication",
+      "Entertainment",
+      "Media & Entertainment"
+    ],
+    "KISSHT": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Other Financial Services"
+    ],
+    "AMBAAUTO": [
+      "Consumer Discretionary",
+      "Automobile and Auto Components",
+      "Automobiles",
+      "Auto Dealer"
+    ],
+    "IDREAM": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Software",
+      "Computers - Software & Consulting"
+    ],
+    "LEXGLOBAL": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Other Financial Services"
     ]
   }
 }
