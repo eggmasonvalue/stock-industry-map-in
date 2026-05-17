@@ -33005,6 +33005,36 @@
       "Financial Services",
       "Finance",
       "Other Financial Services"
+    ],
+    "SIMCA": [
+      "Consumer Discretionary",
+      "Media Entertainment & Publication",
+      "Media",
+      "Advertising & Media Agencies"
+    ],
+    "VALUE360": [
+      "Consumer Discretionary",
+      "Media Entertainment & Publication",
+      "Media",
+      "Advertising & Media Agencies"
+    ],
+    "RECODE": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Personal Products",
+      "Personal Care"
+    ],
+    "MANGLAM": [
+      "Financial Services",
+      "Financial Services",
+      "Finance",
+      "Other Financial Services"
+    ],
+    "APOLLOIN": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Diversified Commercial Services"
     ]
   }
 }
