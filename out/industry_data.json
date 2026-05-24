@@ -33035,6 +33035,48 @@
       "Services",
       "Commercial Services & Supplies",
       "Diversified Commercial Services"
+    ],
+    "VISACHROME": [
+      "Commodities",
+      "Metals & Mining",
+      "Ferrous Metals",
+      "Ferro & Silica Manganese"
+    ],
+    "RFBL": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Packaging"
+    ],
+    "GLPL": [
+      "Healthcare",
+      "Healthcare",
+      "Pharmaceuticals & Biotechnology",
+      "Pharmaceuticals"
+    ],
+    "CENTUPLE": [
+      "Healthcare",
+      "Healthcare",
+      "Pharmaceuticals & Biotechnology",
+      "Pharmaceuticals"
+    ],
+    "BMBMUMG": [
+      "Consumer Discretionary",
+      "Media, Entertainment & Publication",
+      "Entertainment",
+      "Film Production, Distribution & Exhibition"
+    ],
+    "CASTORA": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Iron & Steel Products"
+    ],
+    "KETOMOTORS": [
+      "Consumer Discretionary",
+      "Consumer Services",
+      "Retailing",
+      "Diversified Retail"
     ]
   }
 }
