@@ -33077,6 +33077,66 @@
       "Consumer Services",
       "Retailing",
       "Diversified Retail"
+    ],
+    "ESSEN-RE3": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Trading & Distributors"
+    ],
+    "QLINE": [
+      "Healthcare",
+      "Healthcare",
+      "Healthcare Equipment & Supplies",
+      "Medical Equipment & Supplies"
+    ],
+    "BMLL": [
+      "Healthcare",
+      "Healthcare",
+      "Pharmaceuticals & Biotechnology",
+      "Pharmaceuticals"
+    ],
+    "TEAMTECH": [
+      "Commodities",
+      "Construction Materials",
+      "Other Construction Materials",
+      "Other Construction Materials"
+    ],
+    "NFPSAMPOOR": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Agricultural Food & other Products",
+      "Other Agricultural Products"
+    ],
+    "VPAL": [
+      "Consumer Discretionary",
+      "Consumer Services",
+      "Leisure Services",
+      "Restaurants"
+    ],
+    "AFLTD": [
+      "Consumer Discretionary",
+      "Automobile and Auto Components",
+      "Auto Components",
+      "Auto Components & Equipments"
+    ],
+    "GUJJUBHAI": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Food Products",
+      "Packaged Foods"
+    ],
+    "TANDHANIN": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Diversified Commercial Services"
+    ],
+    "TYPHOON": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
     ]
   }
 }
