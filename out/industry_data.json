@@ -33137,6 +33137,60 @@
       "Textiles",
       "Textiles & Apparels",
       "Other Textile Products"
+    ],
+    "DHANSA": [
+      "Commodities",
+      "Chemicals",
+      "Fertilizers & Agrochemicals",
+      "Pesticides & Agrochemicals"
+    ],
+    "MACHLTD": [
+      "Consumer Discretionary",
+      "Consumer Services",
+      "Other Consumer Services",
+      "Other Consumer Services"
+    ],
+    "MANIVENI": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Agricultural Food & other Products",
+      "Other Agricultural Products"
+    ],
+    "HARIKANTA": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
+    ],
+    "YAASHVI": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Gems, Jewellery And Watches"
+    ],
+    "RFIL": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Garments & Apparels"
+    ],
+    "AUREATE": [
+      "Commodities",
+      "Chemicals",
+      "Chemicals & Petrochemicals",
+      "Trading - Chemicals"
+    ],
+    "MEGAMONT": [
+      "Consumer Discretionary",
+      "Automobile and Auto Components",
+      "Auto Components",
+      "Tyres & Rubber Products"
+    ],
+    "CRAFTROOT": [
+      "Consumer Discretionary",
+      "Automobile and Auto Components",
+      "Auto Components",
+      "Auto Components & Equipments"
     ]
   }
 }
