@@ -33191,6 +33191,72 @@
       "Automobile and Auto Components",
       "Auto Components",
       "Auto Components & Equipments"
+    ],
+    "CMRGREEN": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Aluminium Copper & Zinc Products"
+    ],
+    "HEXAGON": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Food Products",
+      "Packaged Foods"
+    ],
+    "SHAH-RE1": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Iron & Steel Products"
+    ],
+    "GENXAI": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Services",
+      "IT Enabled Services"
+    ],
+    "MRTX": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Manufacturing",
+      "Industrial Products"
+    ],
+    "SMR": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Gems, Jewellery And Watches"
+    ],
+    "VAHH": [
+      "Commodities",
+      "Chemicals",
+      "Chemicals & Petrochemicals",
+      "Specialty Chemicals"
+    ],
+    "UHMVL": [
+      "Consumer Discretionary",
+      "Consumer Services",
+      "Leisure Services",
+      "Tour, Travel Related Services"
+    ],
+    "SELECTRIC": [
+      "Industrials",
+      "Capital Goods",
+      "Electrical Equipment",
+      "Other Electrical Equipment"
+    ],
+    "ARDIALL": [
+      "Services",
+      "Services",
+      "Commercial Services & Supplies",
+      "Diversified Commercial Services"
+    ],
+    "MALTLAND": [
+      "Fast Moving Consumer Goods",
+      "Fast Moving Consumer Goods",
+      "Food Products",
+      "Other Food Products"
     ]
   }
 }
