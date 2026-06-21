@@ -33257,6 +33257,60 @@
       "Fast Moving Consumer Goods",
       "Food Products",
       "Other Food Products"
+    ],
+    "ONIDA": [
+      "Consumer Discretionary",
+      "Consumer Durables",
+      "Consumer Durables",
+      "Consumer Electronics"
+    ],
+    "VAML": [
+      "Commodities",
+      "Metals & Mining",
+      "Non - Ferrous Metals",
+      "Aluminium"
+    ],
+    "VEDPOWER": [
+      "Utilities",
+      "Power",
+      "Power",
+      "Power Generation"
+    ],
+    "VISL": [
+      "Commodities",
+      "Metals & Mining",
+      "Ferrous Metals",
+      "Iron & Steel"
+    ],
+    "VOGL": [
+      "Energy",
+      "Oil Gas & Consumable Fuels",
+      "Oil",
+      "Oil Exploration & Production"
+    ],
+    "UTKAL": [
+      "Commodities",
+      "Forest Materials",
+      "Paper Forest & Jute Products",
+      "Paper & Paper Products"
+    ],
+    "SUSAN": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Cables - Electricals"
+    ],
+    "HORIZON": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Rubber"
+    ],
+    "ISERA": [
+      "Information Technology",
+      "Information Technology",
+      "IT - Software",
+      "Computers - Software & Consulting"
     ]
   }
 }
