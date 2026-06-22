@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Added
+- **Consumer client (`industry_map_client`):** Zero-dependency (stdlib-only)
+  installable package that fetches the published `out/industry_data.json` via
+  ETag-conditional requests + local cache, exposing the union of every sibling
+  consumer's API (`get_industry_data` / `get_industry_map` /
+  `get_company_industry` / `IndustryMap`). Replaces the ~30-line fetcher
+  copy-pasted across nse-corporate-data, FirstFilingsIN, IndiaInc-today,
+  knowledgelm-nse, and surveillance-tracker-in. Ships a `python -m
+  industry_map_client` / `industry-map-refresh` CLI. Packaging now installs only
+  this client (producer `main.py`/`src/` stays run-in-place). Offline test suite
+  under `tests/`.
 - **Core Functionality:** Implemented `main.py`, `src/orchestrator.py`, `src/store.py`, `src/nse_client.py`, and `src/bse_client.py`.
 - **NSE Support:** Full implementation of `NSEClient` with Mainboard and SME support.
 - **BSE Support:** Full implementation of `BSEClient` iterating all security groups.

@@ -1,12 +1,31 @@
 [project]
 name = "industry-data-in"
 version = "0.1.0"
-description = "Add your description here"
+description = "Four-level NSE/BSE industry classification for Indian public stocks, plus a zero-dependency consumer client."
 readme = "README.md"
 requires-python = ">=3.12"
+# Producer (main.py / src/) deps. The consumer client (industry_map_client)
+# is intentionally stdlib-only and adds nothing here.
 dependencies = [
     "bse>=3.2.0",
     "nse[server]>=2.1.0",
     "tenacity>=8.2.0",
     "httpx[http2]>=0.25.0",
 ]
+
+# Consumers install just the client (no producer deps) via:
+#   pip install "industry-map-client @ git+https://github.com/eggmasonvalue/stock-industry-map-in.git"
+[project.optional-dependencies]
+client = []
+
+[project.scripts]
+industry-map-refresh = "industry_map_client.__main__:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+# Package ONLY the consumer client. The producer (main.py, src/*) stays a
+# run-in-place script set and is deliberately not installed.
+[tool.setuptools]
+packages = ["industry_map_client"]
