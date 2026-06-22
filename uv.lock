@@ -97,7 +97,7 @@ wheels = [
 [[package]]
 name = "exchange-access"
 version = "0.1.0"
-source = { git = "https://github.com/eggmasonvalue/exchange-access.git?branch=main#530fb5a38f036f6df14ef6f66a1a4d61ecb25a75" }
+source = { git = "https://github.com/eggmasonvalue/exchange-access.git?tag=v0.1.0#530fb5a38f036f6df14ef6f66a1a4d61ecb25a75" }
 dependencies = [
     { name = "bse" },
     { name = "nse", extra = ["server"] },
@@ -199,7 +199,7 @@ producer = [
 [package.metadata]
 
 [package.metadata.requires-dev]
-producer = [{ name = "exchange-access", git = "https://github.com/eggmasonvalue/exchange-access.git?branch=main" }]
+producer = [{ name = "exchange-access", git = "https://github.com/eggmasonvalue/exchange-access.git?tag=v0.1.0" }]
 
 [[package]]
 name = "mthrottle"
