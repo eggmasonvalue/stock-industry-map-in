@@ -29,8 +29,8 @@ producer = [
 default-groups = ["producer"]
 
 [tool.uv.sources]
-# Shared NSE+BSE client (L1). Pinned to main; repin to a tag once released.
-exchange-access = { git = "https://github.com/eggmasonvalue/exchange-access.git", branch = "main" }
+# Shared NSE+BSE client (L1). Pinned to the v0.1.0 release tag.
+exchange-access = { git = "https://github.com/eggmasonvalue/exchange-access.git", tag = "v0.1.0" }
 
 [project.scripts]
 industry-map-refresh = "industry_map_client.__main__:main"
