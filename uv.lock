@@ -17,11 +17,15 @@ wheels = [
 
 [[package]]
 name = "bse"
-version = "3.1.0"
-source = { git = "https://github.com/eggmasonvalue/BseIndiaApi.git#fbabb508146bfa6e40294c10dfb0189b1738ddb9" }
+version = "3.3.0"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "mthrottle" },
     { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d7/8d/4b77ef6f4d215dd290af294a9d1de765da5c438eb4876a7ad72d76644fca/bse-3.3.0.tar.gz", hash = "sha256:585011be0e524f9650dbf2bfa4877d9687648a0717e42f56afb7ee8608e7804d", size = 29583, upload-time = "2026-05-27T09:14:34.317Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0d/05/2da2adef9e129a90f245797b241530dac40f88c59dbb94c43b992c864840/bse-3.3.0-py3-none-any.whl", hash = "sha256:366312220615b3fff1a4c13ce26da5c0062151a97f7ab07bb53b8504ac680d42", size = 28845, upload-time = "2026-05-27T09:14:33.081Z" },
 ]
 
 [[package]]
@@ -88,6 +92,16 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/4b/51/8ade005e5ca5b0d80fb4aff72a3775b325bdc3d27408c8113811a7cbe640/charset_normalizer-3.4.4-cp314-cp314-win_amd64.whl", hash = "sha256:8a6562c3700cce886c5be75ade4a5db4214fda19fede41d9792d100288d8f94c", size = 107104, upload-time = "2025-10-14T04:41:51.051Z" },
     { url = "https://files.pythonhosted.org/packages/da/5f/6b8f83a55bb8278772c5ae54a577f3099025f9ade59d0136ac24a0df4bde/charset_normalizer-3.4.4-cp314-cp314-win_arm64.whl", hash = "sha256:de00632ca48df9daf77a2c65a484531649261ec9f25489917f09e455cb09ddb2", size = 100743, upload-time = "2025-10-14T04:41:52.122Z" },
     { url = "https://files.pythonhosted.org/packages/0a/4c/925909008ed5a988ccbb72dcc897407e5d6d3bd72410d69e051fc0c14647/charset_normalizer-3.4.4-py3-none-any.whl", hash = "sha256:7a32c560861a02ff789ad905a2fe94e3f840803362c84fecf1851cb4cf3dc37f", size = 53402, upload-time = "2025-10-14T04:42:31.76Z" },
+]
+
+[[package]]
+name = "exchange-access"
+version = "0.1.0"
+source = { git = "https://github.com/eggmasonvalue/exchange-access.git?branch=main#530fb5a38f036f6df14ef6f66a1a4d61ecb25a75" }
+dependencies = [
+    { name = "bse" },
+    { name = "nse", extra = ["server"] },
+    { name = "tenacity" },
 ]
 
 [[package]]
@@ -175,21 +189,17 @@ wheels = [
 [[package]]
 name = "industry-data-in"
 version = "0.1.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "bse" },
-    { name = "httpx", extra = ["http2"] },
-    { name = "nse" },
-    { name = "tenacity" },
+source = { editable = "." }
+
+[package.dev-dependencies]
+producer = [
+    { name = "exchange-access" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "bse", git = "https://github.com/eggmasonvalue/BseIndiaApi.git" },
-    { name = "httpx", extras = ["http2"], specifier = ">=0.25.0" },
-    { name = "nse", git = "https://github.com/eggmasonvalue/NseIndiaApi.git" },
-    { name = "tenacity", specifier = ">=8.2.0" },
-]
+
+[package.metadata.requires-dev]
+producer = [{ name = "exchange-access", git = "https://github.com/eggmasonvalue/exchange-access.git?branch=main" }]
 
 [[package]]
 name = "mthrottle"
@@ -202,10 +212,19 @@ wheels = [
 
 [[package]]
 name = "nse"
-version = "2.0.0"
-source = { git = "https://github.com/eggmasonvalue/NseIndiaApi.git#4de0ca1a30d25a354961d23d5967b0c1bdd3c0f0" }
+version = "3.1.0"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "mthrottle" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/64/22/ca265de57766736dffaf7d33f8a5b3bf2596d92eff243da257ed8cf99945/nse-3.1.0.tar.gz", hash = "sha256:7e9bbf7033ae5b8dedc4d4ca52bf8e70798fccf770df0e18e94f2020dbffce55", size = 31847, upload-time = "2026-06-02T17:37:54.488Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/89/3a/f0a414a36f4f721a666fb5ef564e8f591736b3624a5b40d7f86726190683/nse-3.1.0-py3-none-any.whl", hash = "sha256:f9f08ba47f18f57102a8b1d64942021734d578b808b2e54086913fb74edea6e4", size = 30885, upload-time = "2026-06-02T17:37:53.225Z" },
+]
+
+[package.optional-dependencies]
+server = [
+    { name = "httpx", extra = ["http2"] },
 ]
 
 [[package]]

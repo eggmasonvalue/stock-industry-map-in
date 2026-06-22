@@ -2,11 +2,9 @@ import csv
 import io
 import time
 from typing import Dict, List, Optional
-import requests
-from tenacity import Retrying, stop_after_attempt, wait_exponential, retry_if_exception
-from nse import NSE
+from exchange_access import NSEClient as ExchangeNSEClient
+from exchange_access import RetryProfile, build_retry
 import os
-import httpx
 
 class NSEClient:
     def __init__(self, download_folder="./temp_downloads"):
@@ -16,7 +14,12 @@ class NSEClient:
         if server_mode:
             print("Running in server mode (GitHub Actions detected). Using httpx/http2.")
 
-        self.nse = NSE(download_folder=download_folder, server=True)
+        # Transport, session warm-up and the retry predicate now come from the
+        # shared exchange-access (L1) client. `self.nse` remains the underlying
+        # NSE instance so existing method bodies (`_req`, getDetailedScripData)
+        # are unchanged.
+        self._exchange = ExchangeNSEClient(download_folder=download_folder, server=True)
+        self.nse = self._exchange.nse
         self.base_url = "https://www.nseindia.com/api"
         # Default retry settings (weekly)
         self.max_attempts = 15
@@ -26,52 +29,32 @@ class NSEClient:
         self.max_attempts = max_attempts
         self.max_wait = max_wait
 
-    def _is_retryable_exception(self, exception):
+    def _retryer(self):
+        """Build the per-cadence retry decorator from L1's shared policy.
+
+        Uses the constellation `bulk`-style shape (jittered
+        `wait_random_exponential`, single shared predicate) but keeps this app's
+        dynamic per-cadence attempts/ceiling (daily/weekly/monthly) via a
+        `RetryProfile` built from `set_retry_config`.
         """
-        Checks if an exception is retryable based on strict criteria.
-
-        Retry ONLY if:
-        1. Exception is TimeoutError.
-        2. Exception is ConnectionError AND status code is 429, 503, 408, 502, or 504.
-        """
-        if isinstance(exception, TimeoutError):
-            return True
-
-        if isinstance(exception, ConnectionError):
-            msg = str(exception)
-            # Retry on specific status codes
-            if any(code in msg for code in ["429", "503", "408", "502", "504"]):
-                return True
-            # Explicitly fail on others (400, 401, 403, 404, 500, etc.)
-            return False
-
-        return False
+        return build_retry(
+            RetryProfile(
+                attempts=self.max_attempts,
+                multiplier=1,
+                min_wait=2,
+                max_wait=self.max_wait,
+            )
+        )
 
     def _fetch_url(self, url, params=None):
         """Fetches a URL with retries."""
-        retryer = Retrying(
-            stop=stop_after_attempt(self.max_attempts),
-            wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
-            retry=retry_if_exception(self._is_retryable_exception),
-            reraise=True
-        )
-        try:
-            return retryer(self.nse._req, url, params=params)
-        except Exception as e:
-            raise e
+        return self._retryer()(self.nse._req)(url, params=params)
 
     def _fetch_detailed_scrip_data_with_retry(self, symbol: str, series: str, market_type: str = "N"):
         """Fetches detailed scrip data with retries and optional market type."""
-        retryer = Retrying(
-            stop=stop_after_attempt(self.max_attempts),
-            wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
-            retry=retry_if_exception(self._is_retryable_exception),
-            reraise=True
+        return self._retryer()(self.nse.getDetailedScripData)(
+            symbol, series, marketType=market_type
         )
-        try:
-            return retryer(self.nse.getDetailedScripData, symbol, series, marketType=market_type)
-        except Exception as e:
-            raise e
 
     def get_mainboard_symbols(self) -> List[Dict[str, str]]:
         """Fetches Mainboard symbols and series from CSV."""

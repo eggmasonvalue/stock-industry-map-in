@@ -1,14 +1,18 @@
 import time
 from typing import Dict, List, Optional
-import requests
-from tenacity import Retrying, stop_after_attempt, wait_exponential, retry_if_exception
-from bse import BSE
+from exchange_access import BSEClient as ExchangeBSEClient
+from exchange_access import RetryProfile, build_retry
 import os
 
 class BSEClient:
     def __init__(self, download_folder="./temp_downloads"):
         os.makedirs(download_folder, exist_ok=True)
-        self.bse = BSE(download_folder=download_folder)
+        # Transport and retry predicate now come from the shared exchange-access
+        # (L1) client. `self.bse` remains the underlying BSE instance so existing
+        # method bodies (listSecurities, equityMetaInfo, valid_groups) are
+        # unchanged.
+        self._exchange = ExchangeBSEClient(download_folder=download_folder)
+        self.bse = self._exchange.bse
         # Default retry settings (weekly)
         self.max_attempts = 15
         self.max_wait = 90
@@ -17,52 +21,28 @@ class BSEClient:
         self.max_attempts = max_attempts
         self.max_wait = max_wait
 
-    def _is_retryable_exception(self, exception):
+    def _retryer(self):
+        """Build the per-cadence retry decorator from L1's shared policy.
+
+        Same shared predicate + jittered backoff as the NSE client, keeping this
+        app's dynamic per-cadence attempts/ceiling via a `RetryProfile`.
         """
-        Checks if an exception is retryable based on strict criteria.
-
-        Retry ONLY if:
-        1. Exception is TimeoutError.
-        2. Exception is ConnectionError AND status code is 429, 503, 408, 502, or 504.
-        """
-        if isinstance(exception, TimeoutError):
-            return True
-
-        if isinstance(exception, ConnectionError):
-            msg = str(exception)
-            # Retry on specific status codes
-            if any(code in msg for code in ["429", "503", "408", "502", "504"]):
-                return True
-            # Explicitly fail on others (400, 401, 403, 404, 500, etc.)
-            return False
-
-        return False
+        return build_retry(
+            RetryProfile(
+                attempts=self.max_attempts,
+                multiplier=1,
+                min_wait=2,
+                max_wait=self.max_wait,
+            )
+        )
 
     def _fetch_securities(self, group='A'):
         """Fetches securities with retry."""
-        retryer = Retrying(
-            stop=stop_after_attempt(self.max_attempts),
-            wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
-            retry=retry_if_exception(self._is_retryable_exception),
-            reraise=True
-        )
-        try:
-            return retryer(self.bse.listSecurities, group=group)
-        except Exception as e:
-            raise e
+        return self._retryer()(self.bse.listSecurities)(group=group)
 
     def _fetch_meta_info(self, scrip_code):
         """Fetches meta info with retry."""
-        retryer = Retrying(
-            stop=stop_after_attempt(self.max_attempts),
-            wait=wait_exponential(multiplier=1, min=2, max=self.max_wait),
-            retry=retry_if_exception(self._is_retryable_exception),
-            reraise=True
-        )
-        try:
-            return retryer(self.bse.equityMetaInfo, scrip_code)
-        except Exception as e:
-            raise e
+        return self._retryer()(self.bse.equityMetaInfo)(scrip_code)
 
     def get_securities(self) -> List[Dict[str, str]]:
         """
