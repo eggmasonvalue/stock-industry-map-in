@@ -15,16 +15,22 @@ dependencies = []
 # pulled in when another project depends on this distribution.
 [dependency-groups]
 producer = [
-    "bse>=3.2.0",
-    "nse[server]>=2.1.0",
-    "tenacity>=8.2.0",
-    "httpx[http2]>=0.25.0",
+    # Shared NSE+BSE client (L1): transport seam + retry policy for the
+    # producer's nse_client/bse_client. Re-exports nse[server], bse and tenacity
+    # (and pulls httpx[http2] transitively), so those are no longer declared
+    # directly here. Source pinned in [tool.uv.sources]. Producer-only group, so
+    # this never reaches zero-dependency consumers of `industry_map_client`.
+    "exchange-access",
 ]
 
 [tool.uv]
 # Keep `uv sync` (local + the update_industry_data.yml workflow) installing the
 # producer deps by default, so emptying [project].dependencies doesn't break it.
 default-groups = ["producer"]
+
+[tool.uv.sources]
+# Shared NSE+BSE client (L1). Pinned to main; repin to a tag once released.
+exchange-access = { git = "https://github.com/eggmasonvalue/exchange-access.git", branch = "main" }
 
 [project.scripts]
 industry-map-refresh = "industry_map_client.__main__:main"
