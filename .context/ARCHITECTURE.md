@@ -57,6 +57,23 @@ This project is built as a command-line application (CLI) using Python. It orche
 
 ## Data Flow
 
+### 6. `industry_map_client` (consumer client package)
+- **Purpose:** The *consumer* half of this repo — lets sibling apps read the
+  published `out/industry_data.json` without re-implementing the fetch/cache.
+- **Responsibilities:**
+  - Conditional (ETag/`If-None-Match`) download of the GitHub-raw artifact.
+  - Local cache (`~/.industry_map_in/industry_cache.json` by default; path is
+    configurable) with fallback-to-cache on any network/parse error.
+  - Tolerates both historical on-disk cache shapes (`{metadata,data,etag}` and
+    `{etag,data}`).
+  - Exposes the union of every prior consumer's return shape:
+    `get_industry_data()` -> `{metadata,data}`; `get_industry_map()` ->
+    `{SYMBOL:[levels]}`; `get_company_industry(symbol)` -> last level; plus an
+    `IndustryMap` class (`levels`/`industry`/`classify`/`as_payload`).
+- **Dependencies:** **stdlib only** (deliberately no nse/bse/tenacity/httpx).
+- **Packaging:** `pyproject` ships only `industry_map_client`; the producer
+  (`main.py`, `src/`) stays a run-in-place script set and is not installed.
+
 1.  **Initialization:** `main.py` instantiates `Orchestrator`, which loads `Store` and initializes `NSEClient` and `BSEClient`.
 2.  **Fetching (e.g., Full Refresh):**
     - `Orchestrator` requests BSE securities list from `BSEClient`.

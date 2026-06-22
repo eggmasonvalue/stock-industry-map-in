@@ -25,6 +25,14 @@
 - `tenacity`: Retry logic.
 - `httpx`: Async HTTP client.
 
+## Consumer client (`industry_map_client`)
+
+Beyond producing the dataset, this repo now ships the **consumer** as an
+installable, zero-dependency package so sibling apps stop re-implementing the
+ETag-cached fetch (it was copy-pasted in ~5 repos). See `README.md` -> "Consuming
+the data". Producer and consumer live in one repo by design (single source of
+truth for both the data and how to read it).
+
 ## Quick Start
 
 1.  **Install Dependencies:**
