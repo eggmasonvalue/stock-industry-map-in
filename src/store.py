@@ -2,6 +2,8 @@ import json
 import os
 from typing import Dict, List
 
+from markets_house import write_json_atomic
+
 # JSON Structure:
 # {
 #   "metadata": ["Macro", "Sector", "Industry", "Basic Industry"],
@@ -52,8 +54,7 @@ class Store:
                 print(f"Error creating directory {directory}: {e}")
                 return
 
-        with open(self.filepath, 'w', encoding='utf-8') as f:
-            json.dump(content, f, indent=2, ensure_ascii=False)
+        write_json_atomic(self.filepath, content, indent=2, ensure_ascii=False)
         print(f"Saved data to {self.filepath}")
 
     def update_stock(self, symbol: str, info: List[str]):
