@@ -1,6 +1,5 @@
 import logging
-import time
-from typing import List, Set, Dict
+from typing import List, Dict
 from src.store import Store
 from src.nse_client import NSEClient
 from src.bse_client import BSEClient

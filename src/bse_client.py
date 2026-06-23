@@ -107,6 +107,6 @@ class BSEClient:
                         isubgroup or "-"
                     ]
             return None
-        except Exception as e:
+        except Exception:
             # print(f"Error fetching info for scrip {scrip_code}: {e}")
             return None
