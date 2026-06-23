@@ -194,12 +194,21 @@ source = { editable = "." }
 [package.dev-dependencies]
 producer = [
     { name = "exchange-access" },
+    { name = "markets-house" },
 ]
 
 [package.metadata]
 
 [package.metadata.requires-dev]
-producer = [{ name = "exchange-access", git = "https://github.com/eggmasonvalue/exchange-access.git?tag=v0.1.0" }]
+producer = [
+    { name = "exchange-access", git = "https://github.com/eggmasonvalue/exchange-access.git?tag=v0.1.0" },
+    { name = "markets-house", git = "https://github.com/eggmasonvalue/markets-house.git?tag=v0.1.0" },
+]
+
+[[package]]
+name = "markets-house"
+version = "0.1.0"
+source = { git = "https://github.com/eggmasonvalue/markets-house.git?tag=v0.1.0#992c31f15ea3f0ef7d30c377fcde06f727f224d1" }
 
 [[package]]
 name = "mthrottle"
