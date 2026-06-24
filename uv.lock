@@ -97,7 +97,7 @@ wheels = [
 [[package]]
 name = "exchange-access"
 version = "0.1.0"
-source = { git = "https://github.com/eggmasonvalue/exchange-access.git?tag=v0.1.0#530fb5a38f036f6df14ef6f66a1a4d61ecb25a75" }
+source = { git = "https://github.com/eggmasonvalue/exchange-access.git#78df86745ed55cd82a5f8d8ad8195795c14fc98e" }
 dependencies = [
     { name = "bse" },
     { name = "nse", extra = ["server"] },
@@ -201,14 +201,14 @@ producer = [
 
 [package.metadata.requires-dev]
 producer = [
-    { name = "exchange-access", git = "https://github.com/eggmasonvalue/exchange-access.git?tag=v0.1.0" },
-    { name = "markets-house", git = "https://github.com/eggmasonvalue/markets-house.git?tag=v0.1.0" },
+    { name = "exchange-access", git = "https://github.com/eggmasonvalue/exchange-access.git" },
+    { name = "markets-house", git = "https://github.com/eggmasonvalue/markets-house.git" },
 ]
 
 [[package]]
 name = "markets-house"
 version = "0.1.0"
-source = { git = "https://github.com/eggmasonvalue/markets-house.git?tag=v0.1.0#992c31f15ea3f0ef7d30c377fcde06f727f224d1" }
+source = { git = "https://github.com/eggmasonvalue/markets-house.git#992c31f15ea3f0ef7d30c377fcde06f727f224d1" }
 
 [[package]]
 name = "mthrottle"
