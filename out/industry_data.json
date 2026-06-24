@@ -33311,6 +33311,30 @@
       "Information Technology",
       "IT - Software",
       "Computers - Software & Consulting"
+    ],
+    "LIOTECH": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Other Industrial Products"
+    ],
+    "LESL": [
+      "Industrials",
+      "Construction",
+      "Construction",
+      "Civil Construction"
+    ],
+    "DIKSHA": [
+      "Industrials",
+      "Capital Goods",
+      "Industrial Products",
+      "Packaging"
+    ],
+    "AUDROC": [
+      "Consumer Discretionary",
+      "Textiles",
+      "Textiles & Apparels",
+      "Other Textile Products"
     ]
   }
 }
