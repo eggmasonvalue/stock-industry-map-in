@@ -7,53 +7,27 @@ from exchange_access import RetryProfile, build_retry
 import os
 
 class NSEClient:
-    def __init__(self, download_folder="./temp_downloads"):
+    def __init__(self, download_folder="./temp_downloads", frequency="weekly"):
         os.makedirs(download_folder, exist_ok=True)
-        # Auto-detect server mode (GitHub Actions)
         server_mode = os.environ.get('GITHUB_ACTIONS') == 'true'
         if server_mode:
             print("Running in server mode (GitHub Actions detected). Using httpx/http2.")
 
-        # Transport, session warm-up and the retry predicate now come from the
-        # shared exchange-access (L1) client. `self.nse` remains the underlying
-        # NSE instance so existing method bodies (`_req`, getDetailedScripData)
-        # are unchanged.
-        self._exchange = ExchangeNSEClient(download_folder=download_folder, server=True)
-        self.nse = self._exchange.nse
+        retry_profile = "bulk" if frequency in ("weekly", "monthly") else "default"
+        self._exchange = ExchangeNSEClient(download_folder=download_folder, server=server_mode, retry_profile=retry_profile)
         self.base_url = "https://www.nseindia.com/api"
-        # Default retry settings (weekly)
-        self.max_attempts = 15
-        self.max_wait = 90
 
     def set_retry_config(self, max_attempts: int, max_wait: int):
-        self.max_attempts = max_attempts
-        self.max_wait = max_wait
-
-    def _retryer(self):
-        """Build the per-cadence retry decorator from L1's shared policy.
-
-        Uses the constellation `bulk`-style shape (jittered
-        `wait_random_exponential`, single shared predicate) but keeps this app's
-        dynamic per-cadence attempts/ceiling (daily/weekly/monthly) via a
-        `RetryProfile` built from `set_retry_config`.
-        """
-        return build_retry(
-            RetryProfile(
-                attempts=self.max_attempts,
-                multiplier=1,
-                min_wait=2,
-                max_wait=self.max_wait,
-            )
-        )
+        pass
 
     def _fetch_url(self, url, params=None):
         """Fetches a URL with retries."""
-        return self._retryer()(self.nse._req)(url, params=params)
+        return self._exchange.request(url, params=params)
 
     def _fetch_detailed_scrip_data_with_retry(self, symbol: str, series: str, market_type: str = "N"):
         """Fetches detailed scrip data with retries and optional market type."""
-        return self._retryer()(self.nse.getDetailedScripData)(
-            symbol, series, marketType=market_type
+        return self._exchange.get_detailed_scrip_data(
+            symbol, series, market_type=market_type
         )
 
     def get_mainboard_symbols(self) -> List[Dict[str, str]]:

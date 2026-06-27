@@ -5,44 +5,21 @@ from exchange_access import RetryProfile, build_retry
 import os
 
 class BSEClient:
-    def __init__(self, download_folder="./temp_downloads"):
+    def __init__(self, download_folder="./temp_downloads", frequency="weekly"):
         os.makedirs(download_folder, exist_ok=True)
-        # Transport and retry predicate now come from the shared exchange-access
-        # (L1) client. `self.bse` remains the underlying BSE instance so existing
-        # method bodies (listSecurities, equityMetaInfo, valid_groups) are
-        # unchanged.
-        self._exchange = ExchangeBSEClient(download_folder=download_folder)
-        self.bse = self._exchange.bse
-        # Default retry settings (weekly)
-        self.max_attempts = 15
-        self.max_wait = 90
+        retry_profile = "bulk" if frequency in ("weekly", "monthly") else "default"
+        self._exchange = ExchangeBSEClient(download_folder=download_folder, retry_profile=retry_profile)
 
     def set_retry_config(self, max_attempts: int, max_wait: int):
-        self.max_attempts = max_attempts
-        self.max_wait = max_wait
-
-    def _retryer(self):
-        """Build the per-cadence retry decorator from L1's shared policy.
-
-        Same shared predicate + jittered backoff as the NSE client, keeping this
-        app's dynamic per-cadence attempts/ceiling via a `RetryProfile`.
-        """
-        return build_retry(
-            RetryProfile(
-                attempts=self.max_attempts,
-                multiplier=1,
-                min_wait=2,
-                max_wait=self.max_wait,
-            )
-        )
+        pass
 
     def _fetch_securities(self, group='A'):
         """Fetches securities with retry."""
-        return self._retryer()(self.bse.listSecurities)(group=group)
+        return self._exchange.list_securities(group=group)
 
     def _fetch_meta_info(self, scrip_code):
         """Fetches meta info with retry."""
-        return self._retryer()(self.bse.equityMetaInfo)(scrip_code)
+        return self._exchange.equity_meta_info(scrip_code)
 
     def get_securities(self) -> List[Dict[str, str]]:
         """
@@ -52,7 +29,7 @@ class BSEClient:
         print("Fetching BSE securities list...")
         result = []
 
-        groups = self.bse.valid_groups
+        groups = self._exchange.valid_groups()
         if not groups:
             groups = ('A',)
 

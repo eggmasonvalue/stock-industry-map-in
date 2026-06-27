@@ -11,20 +11,8 @@ logger = logging.getLogger(__name__)
 class Orchestrator:
     def __init__(self, store_path="out/industry_data.json", frequency="weekly"):
         self.store = Store(filepath=store_path)
-        self.nse_client = NSEClient()
-        self.bse_client = BSEClient()
-        self._configure_retries(frequency)
-
-    def _configure_retries(self, frequency):
-        settings = {
-            "daily": {"max_attempts": 5, "max_wait": 30},
-            "weekly": {"max_attempts": 15, "max_wait": 90},
-            "monthly": {"max_attempts": 30, "max_wait": 180}
-        }
-        config = settings.get(frequency, settings["weekly"])
-        logger.info(f"Configuring retries for {frequency}: {config}")
-        self.nse_client.set_retry_config(**config)
-        self.bse_client.set_retry_config(**config)
+        self.nse_client = NSEClient(frequency=frequency)
+        self.bse_client = BSEClient(frequency=frequency)
 
     def _process_nse_securities(self, securities: List[Dict[str, str]]):
         """
